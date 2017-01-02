@@ -1,0 +1,22 @@
+{
+  "name": "getme",
+  "version": "1.0.3",
+  "description": "CLI to get information of specific places nearby",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gabriel Godoy",
+  "keywords": [
+    "google",
+    "maps",
+    "places"
+  ],
+  "bin": {
+    "getme": "index.js"
+  },
+  "preferGlobal": true,
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^1.1.3"
+  }
+}
