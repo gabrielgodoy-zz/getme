@@ -87,8 +87,7 @@ function getWeather(address, commander) {
 ${address.city}, ${address.country} | ${chalk.yellow(date.toDateString())}
 ${getWeatherIcon(weatherObject.weather[0].icon)}  ${weatherObject.weather[0].main} | ${capitalize(weatherObject.weather[0].description)}
 Temperature ${chalk.blue(weatherObject.main.temp, formattedWeatherUnit)}
-Min. ${chalk.blue(weatherObject.main.temp_min, formattedWeatherUnit)} | Max. ${chalk.blue(weatherObject.main.temp_max, formattedWeatherUnit)}
-        `);
+Min. ${chalk.blue(weatherObject.main.temp_min, formattedWeatherUnit)} | Max. ${chalk.blue(weatherObject.main.temp_max, formattedWeatherUnit)}`);
       } else {
         console.log(`
 ${address.city}, ${address.country}`);
