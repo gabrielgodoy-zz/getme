@@ -7,7 +7,7 @@
     "url": "https://github.com/gabrielgodoy/getme"
   },
   "scripts": {
-    "coverage": "istanbul cover _mocha './**/*.test.js'",
+    "coverage": "istanbul cover _mocha --report lcovonly './**/*.test.js'",
     "test": "mocha --colors --reporter progress './**/*.test.js'",
     "test:watch": "npm test -- --watch",
     "lint": "eslint './options/**/*.js'",
@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "coveralls": "^2.11.15",
     "eslint": "^3.12.2",
     "eslint-config-airbnb-base": "^11.0.0",
     "eslint-plugin-import": "^2.2.0",
