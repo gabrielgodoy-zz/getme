@@ -9,7 +9,7 @@ With `getme` you can get weather, forecast, IP address, internet speed, or make 
 
 [![npm](https://img.shields.io/npm/v/getme.svg)](https://www.npmjs.com/package/getme)
 [![Travis](https://img.shields.io/travis/gabrielgodoy/getme.svg)]()
-[![Github All Releases](https://img.shields.io/github/downloads/gabrielgodoy/getme/total.svg)]()
+[![npm](https://img.shields.io/npm/dm/getme.svg)]()
 [![Coverage Status](https://coveralls.io/repos/github/gabrielgodoy/getme/badge.svg?branch=master)](https://coveralls.io/github/gabrielgodoy/getme?branch=master)
 
 Install it globally:
