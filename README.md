@@ -12,26 +12,26 @@ Install it globally:
 
 ### Options
 
-- `-h, --help`    Output usage information
+- `-h, --help`  Output usage information
 - `-s, --search`  Search in Google
-- `-w, weather [unit]`  Get the weather, default unit is Celsius, can be **celsius, fahrenheit, or kelvin**
-- `-f, forecast [unit]`  Get the weather forecast of 5 days ahead, default unit is Celsius
-- `-ip, ip` Get your public and network IP addresses
+- `w, weather [unit]`  Get the weather, default unit is Celsius, can be **celsius, fahrenheit, or kelvin**
+- `f, forecast [unit]`  Get the weather forecast of 5 days ahead, default unit is Celsius
+- `ip`  Get your public and network IP addresses
 
 ### Examples of Usage
 
 `getme -s something to search on Google`
 
+`getme ip`
+
 `getme weather`
 
 `getme forecast`
 
-`getme ip`
-
 ### Different usage for `weather` and `forecast`
 
-- `getme weather` or `getme -w` for Celsius
-- `getme weather f` or `getme -w f` for Fahrenheit
+- `getme weather`  or  `getme w`  for weather in Celsius (default)
+- `getme weather f`  or  `getme w f`  for Fahrenheit
 
-- `getme forecast` or `getme -f` for Celsius 
-- `getme forecast f` or `getme -f f` for Fahrenheit
+- `getme forecast`  or  `getme f` for forecast in Celsius (default) 
+- `getme forecast f`  or  `getme f f` for forecast in Fahrenheit
