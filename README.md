@@ -29,13 +29,15 @@ Install it globally:
 
 ### Examples of Usage
 
-`getme -s something to search on Google`
+`getme -s something to look on Google` Opens browser, searching for "something to look on Google"
 
 `getme weather` Weather in celsius
 
 `getme weather f` Weather in fahrenheit
 
-`getme forecast`
+`getme forecast` Forecast in celsius
+
+`getme forecast f` Forecast in fahrenheit
 
 `getme ip`
 
