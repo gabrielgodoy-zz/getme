@@ -1,6 +1,8 @@
 ## Getme
 CLI utility to get weather forecast, IP address or to make google searches from the terminal.
 
+[![NPM](https://nodei.co/npm/getme.png?downloads=true)](https://nodei.co/npm/getme/)
+
 [![npm](https://img.shields.io/npm/v/getme.svg)](https://www.npmjs.com/package/getme)
 [![Travis](https://img.shields.io/travis/rust-lang/rust.svg)]()
 [![Github All Releases](https://img.shields.io/github/downloads/gabrielgodoy/getme/total.svg)]()
