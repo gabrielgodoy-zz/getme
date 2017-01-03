@@ -7,9 +7,10 @@
     "url": "https://github.com/gabrielgodoy/getme"
   },
   "scripts": {
-    "coverage": "istanbul cover _mocha --report lcovonly -- -R spec './options/**/*.test.js' && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
-    "test": "mocha --colors --reporter progress './options/**/*.test.js'",
+    "coverage": "istanbul cover _mocha ./**/*.test.js",
+    "test": "mocha --colors --reporter spec ./**/*.test.js",
     "test:watch": "npm test -- --watch",
+    "coverage-ci": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec ./**/*.test.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "lint": "eslint './options/**/*.js'",
     "precommit": "npm run lint"
   },
