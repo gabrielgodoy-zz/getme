@@ -1,7 +1,9 @@
 const request = require('request');
 const chalk = require('chalk');
+const ora = require('ora');
 const emoji = require('node-emoji');
 
+let spinner;
 const openWeatherPrefix = 'http://api.openweathermap.org/data/2.5/';
 const key = '59a950ae5e900327f88558d5cce6dfae';
 
@@ -73,7 +75,9 @@ function getWeather(address, commander) {
   const units = `units=${weatherUnitAPI(commander.weather || commander.forecast)}`;
   const APICall = `${openWeatherPrefix}${searchType}?${latAndLon}&${units}&APPID=${key}`;
   const formattedWeatherUnit = weatherUnitAPI(commander.weather || commander.forecast, true);
+
   request(APICall, (error, response, body) => {
+    spinner.stop();
     if (!error && response.statusCode === 200) {
       const weatherObject = JSON.parse(body);
 
@@ -83,8 +87,7 @@ function getWeather(address, commander) {
 ${address.city}, ${address.country} | ${chalk.yellow(date.toDateString())}
 ${getWeatherIcon(weatherObject.weather[0].icon)}  ${weatherObject.weather[0].main} | ${capitalize(weatherObject.weather[0].description)}
 Temperature ${chalk.blue(weatherObject.main.temp, formattedWeatherUnit)}
-Min. ${chalk.blue(weatherObject.main.temp_min, formattedWeatherUnit)} | Max. ${chalk.blue(weatherObject.main.temp_max, formattedWeatherUnit)}
-        `);
+Min. ${chalk.blue(weatherObject.main.temp_min, formattedWeatherUnit)} | Max. ${chalk.blue(weatherObject.main.temp_max, formattedWeatherUnit)}`);
       } else {
         console.log(`
 ${address.city}, ${address.country}`);
@@ -114,6 +117,11 @@ function getAddress(ip, commander) {
 }
 
 function optWeather(commander) {
+  const loadingType = commander.weather ? 'weather' : 'forecast';
+  spinner = ora({
+    text: `Loading ${loadingType}`,
+    color: 'yellow',
+  }).start();
   request('https://api.ipify.org?format=json', (error, response, body) => {
     if (!error && response.statusCode === 200) {
       const ip = JSON.parse(body).ip;

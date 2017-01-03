@@ -6,9 +6,11 @@ function optSearch(commander) {
   const searchQuery = commander.args.join('+');
   const searchAddress = queryGoogle + searchQuery;
 
-  childProcess.exec(`open ${searchAddress}`, () => {
-    console.log(chalk.blue(`Searching for "${commander.args.join(' ')}" on Google`));
-  });
+  console.log(chalk.blue(`Searching for "${commander.args.join(' ')}" on Google`));
+  setTimeout(() => {
+    childProcess.exec(`open ${searchAddress}`, () => {
+    });
+  }, 300);
 }
 
 module.exports = optSearch;

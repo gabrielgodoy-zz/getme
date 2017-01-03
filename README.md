@@ -1,5 +1,9 @@
 ## Getme
-CLI utility to get weather forecast, IP address or to make google searches from the terminal.
+CLI utility for everyday tasks
+
+With `getme` you can get weather, forecast, IP address, internet speed, or make google searches. 
+
+✨ All from the terminal ✨ 
 
 [![NPM](https://nodei.co/npm/getme.png?downloads=true)](https://nodei.co/npm/getme/)
 
@@ -12,23 +16,30 @@ Install it globally:
 
 `npm i getme -g`
 
-### Options
+![Demo](demo.gif)
+
+### Getme Options
 
 - `-h, --help`  Output usage information
 - `-s, --search`  Search in Google
-- `w, weather [unit]`  Get the weather, default unit is Celsius, can be **celsius, fahrenheit, or kelvin**
-- `f, forecast [unit]`  Get the weather forecast of 5 days ahead, default unit is Celsius
-- `ip`  Get your public and network IP addresses
+- `w, weather [unit]`  Get weather, default unit is Celsius, can be **celsius, fahrenheit, or kelvin**
+- `f, forecast [unit]`  Get weather forecast of 5 days ahead, default unit is Celsius
+- `ip`  Get public and network IP addresses
+- `speed`  Get internet speed based on [speedtest](http://www.speedtest.net/)
 
 ### Examples of Usage
 
 `getme -s something to search on Google`
 
-`getme ip`
+`getme weather` Weather in celsius
 
-`getme weather`
+`getme weather f` Weather in fahrenheit
 
 `getme forecast`
+
+`getme ip`
+
+`getme speed`
 
 ### Different usage for `weather` and `forecast`
 
