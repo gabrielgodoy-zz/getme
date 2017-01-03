@@ -12,7 +12,6 @@ With `getme` you can get weather, forecast, IP address, internet speed or to mak
 [![Github All Releases](https://img.shields.io/github/downloads/gabrielgodoy/getme/total.svg)]()
 [![Coverage Status](https://coveralls.io/repos/github/gabrielgodoy/getme/badge.svg?branch=master)](https://coveralls.io/github/gabrielgodoy/getme?branch=master)
 
-
 Install it globally:
 
 `npm i getme -g`
