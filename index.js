@@ -6,7 +6,7 @@ const optIP = require('./options/optIP');
 const optSpeed = require('./options/optSpeed');
 
 commander
-  .version('1.2.1')
+  .version('1.2.2')
   .option('-s, --search', 'Search string on Google')
   .option('w, weather [unit]', 'Get the weather on you region')
   .option('f, forecast [unit]', 'Get the forecast on you region')
