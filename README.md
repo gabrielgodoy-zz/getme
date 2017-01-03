@@ -1,7 +1,7 @@
 ## Getme
 CLI utility for everyday tasks
 
-With `getme` you can get weather, forecast, IP address, internet speed or to make google searches. 
+With `getme` you can get weather, forecast, IP address, internet speed, or make google searches. 
 
 ✨ All from the terminal ✨ 
 
@@ -22,10 +22,10 @@ Install it globally:
 
 - `-h, --help`  Output usage information
 - `-s, --search`  Search in Google
-- `w, weather [unit]`  Get the weather, default unit is Celsius, can be **celsius, fahrenheit, or kelvin**
-- `f, forecast [unit]`  Get the weather forecast of 5 days ahead, default unit is Celsius
-- `ip`  Get your public and network IP addresses
-- `speed`  Get your internet speed based on [speedtest](http://www.speedtest.net/)
+- `w, weather [unit]`  Get weather, default unit is Celsius, can be **celsius, fahrenheit, or kelvin**
+- `f, forecast [unit]`  Get weather forecast of 5 days ahead, default unit is Celsius
+- `ip`  Get public and network IP addresses
+- `speed`  Get internet speed based on [speedtest](http://www.speedtest.net/)
 
 ### Examples of Usage
 
