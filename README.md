@@ -15,8 +15,21 @@ Install it globally:
 - `-h, --help`    Output usage information
 - `-s, --search`  Search in Google
 
+- `-w, weather [unit]`  Get the weather, default unit is Celsius, can be **c, f, or k**
+  - Example `getme weather f` for fahrenheit, or simply `getme weather` to get Celsius
+  
+- `-f, forecast [unit]`  Get the weather forecast of 5 days ahead, default unit is Celsius
+  - Example `getme forecast f` for fahrenheit, or simply `getme forecast` to get Celsius 
+
+
 ### Usage
 
 `getme -s jobs`
+
+`getme weather`
+
+`getme forecast`
+
+`getme ip`
 
 Browser opens with search query `jobs`

@@ -1,13 +1,28 @@
 #! /usr/bin/env node
 const commander = require('commander');
 const optSearch = require('./options/optSearch');
+const optWeather = require('./options/optWeather');
+const optIP = require('./options/optIP');
 
-commander.option('-s, --search', 'Search string on Google')
+commander
+  .option('-s, search', 'Search string on Google')
+  .option('-w, weather [unit]', 'Get the weather on you region')
+  .option('-f, forecast [unit]', 'Get the forecast on you region')
+  .option('-ip, ip', 'Get the your public and local IP address')
   .parse(process.argv);
 
 switch (true) {
-  case (commander.search): {
+  case ('search' in commander): {
     optSearch(commander);
+  }
+    break;
+  case ('weather' in commander):
+  case ('forecast' in commander): {
+    optWeather(commander);
+  }
+    break;
+  case ('ip' in commander): {
+    optIP(commander);
   }
     break;
   default: {
