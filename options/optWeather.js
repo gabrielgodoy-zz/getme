@@ -32,20 +32,21 @@ function getWeather(address, commander) {
       if ('weather' in commander) {
         const date = new Date(weatherObject.dt * 1000);
         console.log(`
-          ${address.city}, ${address.country}
-          ${chalk.yellow(date.toDateString())}
-          Temperature ${chalk.blue(weatherObject.main.temp, formattedWeatherUnit)}
-          Max. ${chalk.blue(weatherObject.main.temp_min, formattedWeatherUnit)} | Min. ${chalk.blue(weatherObject.main.temp_max, formattedWeatherUnit)}
+${address.city}, ${address.country}
+${chalk.yellow(date.toDateString())}
+Temperature ${chalk.blue(weatherObject.main.temp, formattedWeatherUnit)}
+Max. ${chalk.blue(weatherObject.main.temp_min, formattedWeatherUnit)} | Min. ${chalk.blue(weatherObject.main.temp_max, formattedWeatherUnit)}
         `);
       } else {
-        console.log(`${address.city}, ${address.country}`);
+        console.log(`
+${address.city}, ${address.country}`);
         weatherObject.list.forEach((weather) => {
           if (weather.dt_txt.indexOf('12') > -1) {
             const date = new Date(weather.dt_txt);
             console.log(`
-              ${chalk.yellow(date.toDateString())}
-              Temperature ${chalk.blue(weather.main.temp, formattedWeatherUnit)}
-              Max. ${chalk.blue(weather.main.temp_min, formattedWeatherUnit)} | Min. ${chalk.blue(weather.main.temp_max, formattedWeatherUnit)}
+${chalk.yellow(date.toDateString())}
+Temperature ${chalk.blue(weather.main.temp, formattedWeatherUnit)}
+Max. ${chalk.blue(weather.main.temp_min, formattedWeatherUnit)} | Min. ${chalk.blue(weather.main.temp_max, formattedWeatherUnit)}
             `);
           }
         });

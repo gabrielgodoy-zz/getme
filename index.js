@@ -6,9 +6,9 @@ const optIP = require('./options/optIP');
 
 commander
   .option('-s, search', 'Search string on Google')
-  .option('-w, weather [unit]', 'Get the weather on you region')
-  .option('-f, forecast [unit]', 'Get the forecast on you region')
-  .option('-ip, ip', 'Get the your public and local IP address')
+  .option('w, weather [unit]', 'Get the weather on you region')
+  .option('f, forecast [unit]', 'Get the forecast on you region')
+  .option('ip', 'Get the your public and local IP address')
   .parse(process.argv);
 
 switch (true) {
