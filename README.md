@@ -8,8 +8,13 @@ Install it globally:
 
 `npm i getme -g`
 
+### Options
+
+`-h, --help`    Output usage information
+`-s, --search`  Search in Google
+
 ### Usage
 
-`getme jobs`
+`getme -s jobs`
 
 Browser opens with search query `jobs`
