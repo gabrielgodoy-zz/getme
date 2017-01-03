@@ -8,7 +8,7 @@ With `getme` you can get weather, forecast, IP address, internet speed, or make 
 [![NPM](https://nodei.co/npm/getme.png?downloads=true)](https://nodei.co/npm/getme/)
 
 [![npm](https://img.shields.io/npm/v/getme.svg)](https://www.npmjs.com/package/getme)
-[![Travis](https://img.shields.io/travis/rust-lang/rust.svg)]()
+[![Travis](https://img.shields.io/travis/gabrielgodoy/getme.svg)]()
 [![Github All Releases](https://img.shields.io/github/downloads/gabrielgodoy/getme/total.svg)]()
 [![Coverage Status](https://coveralls.io/repos/github/gabrielgodoy/getme/badge.svg?branch=master)](https://coveralls.io/github/gabrielgodoy/getme?branch=master)
 
