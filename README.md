@@ -12,7 +12,7 @@ Install it globally:
 
 `npm i getme -g`
 
-### Options
+### Getme Options
 
 - `-h, --help`  Output usage information
 - `-s, --search`  Search in Google

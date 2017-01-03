@@ -1,6 +1,12 @@
 const request = require('request');
 const chalk = require('chalk');
+const ora = require('ora');
 const os = require('os');
+
+const spinner = ora({
+  text: 'Loading IPs',
+  color: 'yellow',
+});
 
 function getLocalIP() {
   const interfaces = os.networkInterfaces();
@@ -17,8 +23,11 @@ function getLocalIP() {
 }
 
 function optIP() {
+  spinner.start();
+
   request('https://api.ipify.org?format=json', (error, response, body) => {
     if (!error && response.statusCode === 200) {
+      spinner.stop();
       console.log(`Public IP ${chalk.blue(JSON.parse(body).ip)}\nNetwork IP ${chalk.blue(getLocalIP())}`);
     }
     return 'It was not possible to retrieve your IP this time';
