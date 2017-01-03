@@ -13,7 +13,6 @@ chai.use(sinonChai);
 let commanderMock;
 let childProcessSpy;
 let consoleLogSpy;
-let childProcessMock;
 
 describe('optSearch', () => {
   beforeEach(() => {
