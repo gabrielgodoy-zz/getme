@@ -12,8 +12,8 @@ Install it globally:
 
 ### Options
 
-`-h, --help`    Output usage information
-`-s, --search`  Search in Google
+- `-h, --help`    Output usage information
+- `-s, --search`  Search in Google
 
 ### Usage
 
