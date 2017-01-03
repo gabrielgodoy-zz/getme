@@ -7,7 +7,7 @@
     "url": "https://github.com/gabrielgodoy/getme"
   },
   "scripts": {
-    "coverage": "istanbul cover _mocha --report lcovonly './options/**/*.test.js'",
+    "coverage": "istanbul cover _mocha --report lcovonly -- -R spec './options/**/*.test.js' && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "test": "mocha --colors --reporter progress './options/**/*.test.js'",
     "test:watch": "npm test -- --watch",
     "lint": "eslint './options/**/*.js'",
@@ -54,6 +54,7 @@
     "husky": "^0.12.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
+    "mocha-lcov-reporter": "^1.2.0",
     "sinon": "^1.17.7",
     "sinon-chai": "^2.8.0"
   }
