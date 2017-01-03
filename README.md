@@ -14,17 +14,13 @@ Install it globally:
 
 - `-h, --help`    Output usage information
 - `-s, --search`  Search in Google
-
-- `-w, weather [unit]`  Get the weather, default unit is Celsius, can be **c, f, or k**
-  - Example `getme weather f` for fahrenheit, or simply `getme weather` to get Celsius
-  
+- `-w, weather [unit]`  Get the weather, default unit is Celsius, can be **celsius, fahrenheit, or kelvin**
 - `-f, forecast [unit]`  Get the weather forecast of 5 days ahead, default unit is Celsius
-  - Example `getme forecast f` for fahrenheit, or simply `getme forecast` to get Celsius 
+- `-ip, ip` Get your public and network IP addresses
 
+### Examples of Usage
 
-### Usage
-
-`getme -s jobs`
+`getme -s something to search on Google`
 
 `getme weather`
 
@@ -32,4 +28,10 @@ Install it globally:
 
 `getme ip`
 
-Browser opens with search query `jobs`
+### Different usage for `weather` and `forecast`
+
+- `getme weather` or `getme -w` for Celsius
+- `getme weather f` or `getme -w f` for Fahrenheit
+
+- `getme forecast` or `getme -f` for Celsius 
+- `getme forecast f` or `getme -f f` for Fahrenheit
