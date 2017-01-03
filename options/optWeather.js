@@ -38,7 +38,9 @@ function getWeather(address, commander) {
           Max. ${chalk.blue(weatherObject.main.temp_min, formattedWeatherUnit)} | Min. ${chalk.blue(weatherObject.main.temp_max, formattedWeatherUnit)}
         `);
       } else {
-        console.log(`${address.city}, ${address.country}`);
+        console.log(`
+              ${address.city}, ${address.country}
+        `);
         weatherObject.list.forEach((weather) => {
           if (weather.dt_txt.indexOf('12') > -1) {
             const date = new Date(weather.dt_txt);
