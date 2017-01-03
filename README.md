@@ -31,7 +31,9 @@ Install it globally:
 
 `getme -s something to search on Google`
 
-`getme weather`
+`getme weather` Weather in celsius
+
+`getme weather f` Weather in fahrenheit
 
 `getme forecast`
 
