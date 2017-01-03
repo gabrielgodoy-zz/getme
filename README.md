@@ -1,5 +1,5 @@
 ## Getme
-CLI utilities for everyday tasks
+CLI utility for everyday tasks
 
 With `getme` you can get weather, forecast, IP address, internet speed or to make google searches. 
 
