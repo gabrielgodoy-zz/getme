@@ -20,3 +20,4 @@ Temporary Items
 node_modules
 .idea
 coverage
+npm-debug.log
