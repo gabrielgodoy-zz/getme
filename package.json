@@ -7,8 +7,8 @@
     "url": "https://github.com/gabrielgodoy/getme"
   },
   "scripts": {
-    "coverage": "istanbul cover _mocha --report lcovonly './**/*.test.js'",
-    "test": "mocha --colors --reporter progress './**/*.test.js'",
+    "coverage": "istanbul cover _mocha --report lcovonly './options/**/*.test.js'",
+    "test": "mocha --colors --reporter progress './options/**/*.test.js'",
     "test:watch": "npm test -- --watch",
     "lint": "eslint './options/**/*.js'",
     "precommit": "npm run lint"
