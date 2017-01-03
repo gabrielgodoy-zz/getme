@@ -1,5 +1,5 @@
 ## Getme
-CLI to search things on Google, it automatically opens the browser with the search query for you.
+CLI utility to get weather forecast, IP address or to make google searches from the terminal.
 
 [![npm](https://img.shields.io/npm/v/getme.svg)](https://www.npmjs.com/package/getme)
 [![Travis](https://img.shields.io/travis/rust-lang/rust.svg)]()
