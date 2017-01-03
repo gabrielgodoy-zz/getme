@@ -7,7 +7,24 @@
     "url": "https://github.com/gabrielgodoy/getme"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "coverage": "istanbul cover _mocha --report lcovonly -- -R spec './options/**/*.test.js' && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "test": "mocha --colors --reporter progress './options/**/*.test.js'",
+    "test:watch": "npm test -- --watch",
+    "lint": "eslint './options/**/*.js'",
+    "precommit": "npm run lint"
+  },
+  "eslintConfig": {
+    "extends": "airbnb-base",
+    "plugins": [
+      "import"
+    ],
+    "rules": {
+      "no-console": 0
+    },
+    "env": {
+      "browser": true,
+      "mocha": true
+    }
   },
   "author": "Gabriel Godoy",
   "keywords": [
@@ -21,6 +38,24 @@
   "preferGlobal": true,
   "license": "MIT",
   "dependencies": {
-    "chalk": "^1.1.3"
+    "chalk": "^1.1.3",
+    "commander": "^2.9.0"
+  },
+  "bugs": {
+    "url": "https://github.com/gabrielgodoy/getme/issues",
+    "email": "hi@gabrielgodoy.com"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "coveralls": "^2.11.15",
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb-base": "^11.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "husky": "^0.12.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "mocha-lcov-reporter": "^1.2.0",
+    "sinon": "^1.17.7",
+    "sinon-chai": "^2.8.0"
   }
 }
