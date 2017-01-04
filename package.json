@@ -1,6 +1,6 @@
 {
   "name": "getme",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "CLI to get information of specific places nearby",
   "repository": {
     "type": "git",
