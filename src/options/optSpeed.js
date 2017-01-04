@@ -1,4 +1,6 @@
-const speedTest = require('speedtest-net');
+/* eslint-disable prefer-const */
+
+let speedTest = require('speedtest-net');
 const chalk = require('chalk');
 const ora = require('ora');
 
@@ -10,6 +12,8 @@ const spinner = ora({
 function optSpeed() {
   spinner.start();
   const test = speedTest({ maxTime: 5000 });
+
+  console.log(speedTest({ maxTime: 5000 }));
 
   test.on('data', (data) => {
     spinner.stop();
