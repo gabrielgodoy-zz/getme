@@ -1,6 +1,6 @@
 {
   "name": "getme",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "CLI to get information of specific places nearby",
   "repository": {
     "type": "git",
@@ -11,7 +11,7 @@
     "test:watch": "npm test -- --watch",
     "coverage": "istanbul cover _mocha ./**/*.js",
     "lint": "eslint './options/**/*.js'",
-    "precommit": "npm run lint"
+    "precommit": "npm run lint && npm test"
   },
   "eslintConfig": {
     "extends": "airbnb-base",

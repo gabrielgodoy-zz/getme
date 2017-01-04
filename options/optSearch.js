@@ -1,12 +1,12 @@
 const chalk = require('chalk');
 const childProcess = require('child_process');
 
-function optSearch(commander) {
+function optSearch(query) {
   const queryGoogle = 'https://www.google.com/search?q=';
-  const searchQuery = commander.args.join('+');
+  const searchQuery = query.join('+');
   const searchAddress = queryGoogle + searchQuery;
 
-  console.log(chalk.blue(`Searching for "${commander.args.join(' ')}" on Google`));
+  console.log(chalk.blue(`Searching for "${query.join(' ')}" on Google`));
   setTimeout(() => {
     childProcess.exec(`open ${searchAddress}`, () => {
     });
