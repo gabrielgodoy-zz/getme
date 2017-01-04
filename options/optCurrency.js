@@ -98,12 +98,19 @@ function optCurrency(command) {
   }
 
   request(apiURL, (error, response, body) => {
-    const apiResponse = JSON.parse(body);
+    let apiResponse;
+    try {
+      apiResponse = JSON.parse(body);
+    } catch (parseError) {
+      console.log(chalk.red('Something went wrong in the API. Try in a few minutes'));
+      return parseError;
+    }
+
     if ('error' in apiResponse) {
       console.log(chalk.red('It was not possible to retrieve what you want'));
-      return;
+      return false;
     }
-    console.log(`
+    return console.log(`
 ${chalk.yellow('Base currency')} ${getCountryIcon(apiResponse.base)}  ${chalk.cyan(apiResponse.base)}
 -------------\nCurrency Rates\n
 ${formatRates(apiResponse.rates)}`);
