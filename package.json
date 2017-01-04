@@ -7,10 +7,12 @@
     "url": "https://github.com/gabrielgodoy/getme"
   },
   "scripts": {
-    "test": "mocha --colors --reporter spec ./**/*.test.js",
+    "prepublish": "npm run build",
+    "build": "babel src -d dist",
+    "test": "mocha --colors --reporter spec ./src/**/*.test.js",
     "test:watch": "npm test -- --watch",
-    "coverage": "istanbul cover _mocha ./**/*.js",
-    "lint": "eslint './options/**/*.js'",
+    "coverage": "istanbul cover _mocha ./src/**/*.js",
+    "lint": "eslint './src/**/*.js'",
     "precommit": "npm run lint && npm test"
   },
   "eslintConfig": {
@@ -34,7 +36,12 @@
     "weather"
   ],
   "bin": {
-    "getme": "index.js"
+    "getme": "./dist/index.js"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
   },
   "preferGlobal": true,
   "license": "MIT",
@@ -51,6 +58,8 @@
     "email": "hi@gabrielgodoy.com"
   },
   "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-es2015": "^6.18.0",
     "chai": "^3.5.0",
     "coveralls": "^2.11.15",
     "eslint": "^3.12.2",
