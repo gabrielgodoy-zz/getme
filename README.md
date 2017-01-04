@@ -21,7 +21,7 @@ Install it globally:
 ### Getme Options
 
 - `-h, --help`  Output usage information
-- `-s, --search`  Search in Google
+- `s, search`  Search in Google
 - `w, weather [unit]`  Get weather, default unit is Celsius, can be **celsius, fahrenheit, or kelvin**
 - `f, forecast [unit]`  Get weather forecast of 5 days ahead, default unit is Celsius
 - `ip`  Get public and network IP addresses
@@ -29,15 +29,15 @@ Install it globally:
 
 ### Examples of Usage
 
-`getme -s something to look on Google` Opens browser, searching for "something to look on Google"
+`getme s something to search on Google` Opens browser, searching for "something to search on Google"
 
 `getme weather` Weather in celsius
 
-`getme weather f` Weather in fahrenheit
+`getme weather -f` Weather in fahrenheit
 
 `getme forecast` Forecast in celsius
 
-`getme forecast f` Forecast in fahrenheit
+`getme forecast -f` Forecast in fahrenheit
 
 `getme ip`
 
@@ -46,7 +46,7 @@ Install it globally:
 ### Different usage for `weather` and `forecast`
 
 - `getme weather`  or  `getme w`  for weather in Celsius (default)
-- `getme weather f`  or  `getme w f`  for Fahrenheit
+- `getme weather f`  or  `getme w -f`  for Fahrenheit
 
 - `getme forecast`  or  `getme f` for forecast in Celsius (default) 
-- `getme forecast f`  or  `getme f f` for forecast in Fahrenheit
+- `getme forecast f`  or  `getme f -f` for forecast in Fahrenheit
