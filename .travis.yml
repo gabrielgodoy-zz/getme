@@ -5,4 +5,7 @@ notifications:
   email:
     on_success: never
     on_failure: always
-after_script: NODE_ENV=test istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec ./src/**/*.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
+scripts:
+  - npm run build
+after_success:
+  - npm run coveralls
