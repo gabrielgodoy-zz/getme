@@ -11,7 +11,8 @@
     "build": "babel src -d dist",
     "test": "mocha --colors --reporter spec ./src/**/*.test.js",
     "test:watch": "npm test -- --watch",
-    "coverage": "istanbul cover _mocha ./src/**/*.js",
+    "coverage": "istanbul cover _mocha './src/**/*!(.test).js'",
+    "coveralls": "NODE_ENV=test istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec './src/**/*!(.test).js' && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "lint": "eslint './src/**/*.js'",
     "precommit": "npm run lint && npm test"
   },
