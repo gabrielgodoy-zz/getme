@@ -4,6 +4,7 @@ const optSearch = require('./options/optSearch');
 const optWeather = require('./options/optWeather');
 const optIP = require('./options/optIP');
 const optSpeed = require('./options/optSpeed');
+const optCurrency = require('./options/optCurrency');
 
 commander
   .version('1.2.3')
@@ -23,6 +24,14 @@ commander
   .option('-f, --fahrenheit', 'Get the weather in fahrenheit unit')
   .option('-k, --kelvin', 'Get the weather in kelvin unit')
   .action(command => optWeather(command));
+
+commander
+  .command('currency')
+  .alias('cur')
+  .description('Get currency rates')
+  .option('-b, --base <baseCurrency>', 'Sets which base currency will be compared against the others (Default: USD)')
+  .option('-s, --symbols <symbols>', 'Sets which currencies you want to compare against the base currency (Default: All currencies)')
+  .action(command => optCurrency(command));
 
 commander
   .command('ip')
