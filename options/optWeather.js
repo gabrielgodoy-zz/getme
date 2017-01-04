@@ -11,16 +11,13 @@ function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
 
-function weatherUnitAPI(weatherOpts, formatted = false) {
-  if (weatherOpts === true) {
-    return formatted ? '°C' : 'metric';
-  }
-  switch (weatherOpts.replace('-', '')) {
-    case ('f'):
+function weatherUnitAPI(command, formatted = false) {
+  switch (true) {
+    case (command.fahrenheit):
       return formatted ? '°F' : 'imperial';
-    case ('k'):
+    case (command.kelvin):
       return formatted ? 'K' : undefined;
-    case ('c'):
+    case (command.celsius):
     default:
       return formatted ? '°C' : 'metric';
   }
@@ -69,19 +66,19 @@ function getWeatherIcon(iconID) {
   }
 }
 
-function getWeather(address, commander) {
-  const searchType = commander.weather ? 'weather' : 'forecast';
+function getWeather(address, command) {
+  const searchType = command.name() === 'weather' ? 'weather' : 'forecast';
   const latAndLon = `lat=${address.lat}&lon=${address.lon}`;
-  const units = `units=${weatherUnitAPI(commander.weather || commander.forecast)}`;
+  const units = `units=${weatherUnitAPI(command)}`;
   const APICall = `${openWeatherPrefix}${searchType}?${latAndLon}&${units}&APPID=${key}`;
-  const formattedWeatherUnit = weatherUnitAPI(commander.weather || commander.forecast, true);
+  const formattedWeatherUnit = weatherUnitAPI(command, true);
 
   request(APICall, (error, response, body) => {
     spinner.stop();
     if (!error && response.statusCode === 200) {
       const weatherObject = JSON.parse(body);
 
-      if ('weather' in commander) {
+      if (command.name() === 'weather') {
         const date = new Date(weatherObject.dt * 1000);
         console.log(`
 ${address.city}, ${address.country} | ${chalk.yellow(date.toDateString())}
@@ -107,17 +104,17 @@ Min. ${chalk.blue(weather.main.temp_min, formattedWeatherUnit)} | Max. ${chalk.b
   });
 }
 
-function getAddress(ip, commander) {
+function getAddress(ip, command) {
   request(`http://ip-api.com/json/${ip}`, (error, response, body) => {
     if (!error && response.statusCode === 200) {
       const address = JSON.parse(body);
-      getWeather(address, commander);
+      getWeather(address, command);
     }
   });
 }
 
-function optWeather(commander) {
-  const loadingType = commander.weather ? 'weather' : 'forecast';
+function optWeather(command) {
+  const loadingType = command.name() === 'weather' ? 'weather' : 'forecast';
   spinner = ora({
     text: `Loading ${loadingType}`,
     color: 'yellow',
@@ -125,7 +122,7 @@ function optWeather(commander) {
   request('https://api.ipify.org?format=json', (error, response, body) => {
     if (!error && response.statusCode === 200) {
       const ip = JSON.parse(body).ip;
-      getAddress(ip, commander);
+      getAddress(ip, command);
     }
   });
 }

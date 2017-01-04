@@ -9,7 +9,7 @@ With `getme` you can get weather, forecast, IP address, internet speed, or make 
 
 [![npm](https://img.shields.io/npm/v/getme.svg)](https://www.npmjs.com/package/getme)
 [![Travis](https://img.shields.io/travis/gabrielgodoy/getme.svg)]()
-[![Github All Releases](https://img.shields.io/github/downloads/gabrielgodoy/getme/total.svg)]()
+[![npm](https://img.shields.io/npm/dm/getme.svg)]()
 [![Coverage Status](https://coveralls.io/repos/github/gabrielgodoy/getme/badge.svg?branch=master)](https://coveralls.io/github/gabrielgodoy/getme?branch=master)
 
 Install it globally:
@@ -21,7 +21,7 @@ Install it globally:
 ### Getme Options
 
 - `-h, --help`  Output usage information
-- `-s, --search`  Search in Google
+- `s, search`  Search in Google
 - `w, weather [unit]`  Get weather, default unit is Celsius, can be **celsius, fahrenheit, or kelvin**
 - `f, forecast [unit]`  Get weather forecast of 5 days ahead, default unit is Celsius
 - `ip`  Get public and network IP addresses
@@ -29,13 +29,15 @@ Install it globally:
 
 ### Examples of Usage
 
-`getme -s something to search on Google`
+`getme s something to search on Google` Opens browser, searching for "something to search on Google"
 
 `getme weather` Weather in celsius
 
-`getme weather f` Weather in fahrenheit
+`getme weather -f` Weather in fahrenheit
 
-`getme forecast`
+`getme forecast` Forecast in celsius
+
+`getme forecast -f` Forecast in fahrenheit
 
 `getme ip`
 
@@ -44,7 +46,7 @@ Install it globally:
 ### Different usage for `weather` and `forecast`
 
 - `getme weather`  or  `getme w`  for weather in Celsius (default)
-- `getme weather f`  or  `getme w f`  for Fahrenheit
+- `getme weather f`  or  `getme w -f`  for Fahrenheit
 
 - `getme forecast`  or  `getme f` for forecast in Celsius (default) 
-- `getme forecast f`  or  `getme f f` for forecast in Fahrenheit
+- `getme forecast f`  or  `getme f -f` for forecast in Fahrenheit

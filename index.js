@@ -6,32 +6,40 @@ const optIP = require('./options/optIP');
 const optSpeed = require('./options/optSpeed');
 
 commander
-  .option('-s, search', 'Search string on Google')
-  .option('w, weather [unit]', 'Get the weather on you region')
-  .option('f, forecast [unit]', 'Get the forecast on you region')
-  .option('ip', 'Get the your public and local IP address')
-  .option('speed', 'Get the speed of your connection')
-  .parse(process.argv);
+  .version('1.2.3')
+  .command('weather')
+  .alias('w')
+  .description('Get weather')
+  .option('-c, --celsius', 'Get the weather in celsius unit (Default)')
+  .option('-f, --fahrenheit', 'Get the weather in fahrenheit unit')
+  .option('-k, --kelvin', 'Get the weather in kelvin unit')
+  .action(command => optWeather(command));
 
-switch (true) {
-  case ('search' in commander): {
-    optSearch(commander);
-  }
-    break;
-  case ('weather' in commander):
-  case ('forecast' in commander): {
-    optWeather(commander);
-  }
-    break;
-  case ('ip' in commander): {
-    optIP(commander);
-  }
-    break;
-  case ('speed' in commander): {
-    optSpeed(commander);
-  }
-    break;
-  default: {
-    console.log('No option found');
-  }
-}
+commander
+  .command('forecast')
+  .alias('f')
+  .description('Get weather forecast of five days ahead')
+  .option('-c, --celsius', 'Get the weather in celsius unit (Default)')
+  .option('-f, --fahrenheit', 'Get the weather in fahrenheit unit')
+  .option('-k, --kelvin', 'Get the weather in kelvin unit')
+  .action(command => optWeather(command));
+
+commander
+  .command('ip')
+  .description('Get the your public and local IP address')
+  .action(command => optIP(command));
+
+commander
+  .command('speed')
+  .description('Get the speed of your connection')
+  .action(command => optSpeed(command));
+
+commander
+  .command('search [query...]')
+  .alias('s')
+  .description('Search string on Google')
+  .action((query) => {
+    optSearch(query);
+  });
+
+commander.parse(process.argv);
