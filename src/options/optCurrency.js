@@ -2,8 +2,6 @@ const request = require('request');
 const chalk = require('chalk');
 const emoji = require('node-emoji');
 
-const fixedAPIPrefix = 'http://api.fixer.io/latest?base=';
-
 function getCountryIcon(countryInitial) {
   switch (countryInitial) {
     case 'USD':
@@ -68,12 +66,9 @@ function getCountryIcon(countryInitial) {
       return emoji.get('flag-th');
     case 'ZAR':
       return emoji.get('flag-za');
-    case 'ISK':
-      return emoji.get('flag-is');
     case 'EUR':
-      return emoji.get('euro');
     default:
-      return '';
+      return emoji.get('euro');
   }
 }
 
@@ -86,7 +81,7 @@ function formatRates(rates) {
 }
 
 function optCurrency(command) {
-  let apiURL = fixedAPIPrefix;
+  let apiURL = 'http://api.fixer.io/latest?base=';
   if ('base' in command) {
     apiURL += `${command.base}&`;
   } else {
