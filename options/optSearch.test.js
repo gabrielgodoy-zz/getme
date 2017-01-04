@@ -10,21 +10,19 @@ const optSearch = require('./optSearch');
 const expect = chai.expect;
 chai.use(sinonChai);
 
-let commanderMock;
+let queryMock;
 let childProcessSpy;
 let consoleLogSpy;
 
 describe('optSearch', () => {
   beforeEach(() => {
-    commanderMock = {
-      args: ['arg1', 'arg2'],
-    };
+    queryMock = ['arg1', 'arg2'];
   });
 
   it('Should call child_process.exec once successfully', (done) => {
     childProcessSpy = sinon.spy(childProcess, 'exec');
 
-    optSearch(commanderMock);
+    optSearch(queryMock);
     setTimeout(() => {
       expect(childProcessSpy).to.have.been.calledOnce;
       childProcess.exec.restore();
@@ -35,7 +33,7 @@ describe('optSearch', () => {
   it('Should log message to user if search was successful', (done) => {
     consoleLogSpy = sinon.spy(console, 'log');
 
-    optSearch(commanderMock);
+    optSearch(queryMock);
     setTimeout(() => {
       expect(consoleLogSpy).to.have.been.calledWith(chalk.blue('Searching for "arg1 arg2" on Google'));
       console.log.restore();
