@@ -11,32 +11,36 @@ const expect = chai.expect;
 chai.use(sinonChai);
 
 let queryMock;
-let childProcessSpy;
+let childProcessStub;
 let consoleLogSpy;
 
 describe('optSearch', () => {
   beforeEach(() => {
     queryMock = ['arg1', 'arg2'];
+
+    consoleLogSpy = sinon.spy(console, 'log');
+    // Stub to prevent exec() from opening the browser while testing
+    childProcessStub = sinon.stub(childProcess, 'exec');
   });
 
-  it('Should call child_process.exec once successfully', (done) => {
-    childProcessSpy = sinon.spy(childProcess, 'exec');
+  afterEach(() => {
+    childProcess.exec.restore();
+    console.log.restore();
+  });
 
+  it('Should call child_process.exec with correct search URL', (done) => {
+    const queryGoogle = 'https://www.google.com/search?q=';
     optSearch(queryMock);
     setTimeout(() => {
-      expect(childProcessSpy).to.have.been.calledOnce;
-      childProcess.exec.restore();
+      expect(childProcessStub).to.have.been.calledWith(`open ${queryGoogle}${queryMock.join('+')}`);
       done();
     }, 300);
   });
 
-  it('Should log message to user if search was successful', (done) => {
-    consoleLogSpy = sinon.spy(console, 'log');
-
+  it('Should log Searching message to user', (done) => {
     optSearch(queryMock);
     setTimeout(() => {
       expect(consoleLogSpy).to.have.been.calledWith(chalk.blue('Searching for "arg1 arg2" on Google'));
-      console.log.restore();
       done();
     }, 300);
   });

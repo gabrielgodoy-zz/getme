@@ -28,11 +28,12 @@ function optIP() {
   request('https://api.ipify.org?format=json', (error, response, body) => {
     if (!error && response.statusCode === 200) {
       spinner.stop();
-      console.log(`
+      return console.log(`
 Public IP ${chalk.blue(JSON.parse(body).ip)}\nNetwork IP ${chalk.blue(getLocalIP())}
 `);
     }
-    return 'It was not possible to retrieve your IP this time';
+    spinner.stop();
+    return console.log('It was not possible to retrieve your IP this time');
   });
 }
 
