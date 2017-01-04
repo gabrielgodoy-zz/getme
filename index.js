@@ -38,8 +38,6 @@ commander
   .command('search [query...]')
   .alias('s')
   .description('Search string on Google')
-  .action((query) => {
-    optSearch(query);
-  });
+  .action(query => optSearch(query));
 
 commander.parse(process.argv);
