@@ -7,7 +7,7 @@ const optSpeed = require('./options/optSpeed');
 const optCurrency = require('./options/optCurrency');
 
 commander
-  .version('1.2.3')
+  .version('1.2.6')
   .command('weather')
   .alias('w')
   .description('Get weather')

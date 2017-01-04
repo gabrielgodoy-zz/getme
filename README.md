@@ -20,15 +20,15 @@ Install it globally
 
 ### Getme Options
 
-| command                               | definition                                                                                                     |
-| --------------------------------------| --------------------------------------------------------------------------------------------------------------:|
-| ℹ️ `-h, --help`                        | Output usage information                                                                                       |
-| 🔎 `s, search [query]`                 | Search in Google                                                                                               |
-| ☀️ `w, weather [unit]`                 | Get weather, default unit is Celsius, can be **celsius, fahrenheit, or kelvin**                                |
-| 🗓 `f, forecast [unit]`                | Get weather forecast of 5 days ahead, default unit is Celsius                                                  |
-| 💰 `cur, currency [base] [currencies]` | Get specific currency rates against a base currency (default base USD, default currencies All)                 |
-| 🌎 `ip`                                | Get public and network IP addresses                                                                            |
-| ⚡ `speed`                             | Get internet speed based on [speedtest](http://www.speedtest.net/)                                             |
+| command                               | definition                                                                                                      |
+| --------------------------------------| :---------------------------------------------------------------------------------------------------------------|
+|`-h, --help`                           | Output usage information                                                                                        |
+|`s, search [query]`                    | Search in Google                                                                                                |
+|`w, weather [unit]`                    | Get weather, default unit is Celsius, can be **celsius, fahrenheit, or kelvin**                                 |
+|`f, forecast [unit]`                   | Get weather forecast of 5 days ahead, default unit is Celsius                                                   |
+|`cur, currency [base] [currs]`         | Get currency rates against a base currency (default base USD, default currencies All)                           |
+|`ip`                                   | Get public and network IP addresses                                                                             |
+|`speed`                                | Get internet speed based on [speedtest](http://www.speedtest.net/)                                              |
 
 
 ### Examples of usage
