@@ -13,8 +13,6 @@ function optSpeed() {
   spinner.start();
   const test = speedTest({ maxTime: 5000 });
 
-  console.log(speedTest({ maxTime: 5000 }));
-
   test.on('data', (data) => {
     spinner.stop();
     console.log(`

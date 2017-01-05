@@ -60,7 +60,7 @@ Ping ${chalk.blue(999)} ms
   });
 
   xit('should log error message if some problem occurs', (done) => {
-    optSpeed(); // Should I force the error here?
+    optSpeed();
     setTimeout(() => {
       expect(consoleSpy).to.have.been.calledWith(`
 An error ocurred
