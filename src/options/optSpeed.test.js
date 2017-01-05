@@ -16,7 +16,13 @@ let consoleSpy;
 describe('optSpeed', () => {
   beforeEach(() => {
     consoleSpy = sinon.spy(console, 'log');
+  });
 
+  afterEach(() => {
+    console.log.restore();
+  });
+
+  it('should log to user internet speeds', (done) => {
     const speedTestMock = function speedTestMock() {
       return {
         on: (event, callback) => {
@@ -32,22 +38,10 @@ describe('optSpeed', () => {
             };
             callback(data);
           }
-          if (event === 'error') {
-            const error = 'someError';
-            callback(error);
-          }
         },
       };
     };
-
     optSpeed.__set__('speedTest', speedTestMock);
-  });
-
-  afterEach(() => {
-    console.log.restore();
-  });
-
-  it('should log to user internet speeds', (done) => {
     optSpeed();
     setTimeout(() => {
       expect(consoleSpy).to.have.been.calledWith(`
@@ -59,12 +53,21 @@ Ping ${chalk.blue(999)} ms
     }, 300);
   });
 
-  xit('should log error message if some problem occurs', (done) => {
+  it('should log error message if some problem occurs', (done) => {
+    const speedTestMock = function speedTestMock() {
+      return {
+        on: (event, callback) => {
+          if (event === 'error') {
+            callback('error');
+          }
+        },
+      };
+    };
+    optSpeed.__set__('speedTest', speedTestMock);
+
     optSpeed();
     setTimeout(() => {
-      expect(consoleSpy).to.have.been.calledWith(`
-An error ocurred
-`);
+      expect(consoleSpy).to.have.been.calledWith('An error ocurred');
       done();
     }, 300);
   });

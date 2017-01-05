@@ -21,8 +21,8 @@ Upload ${chalk.blue(data.speeds.upload)} Mbps
 Ping ${chalk.blue(data.server.ping)} ms
 `);
   });
-  test.on('error', (err) => {
-    console.error(`An error ocurred, ${err}`);
+  test.on('error', () => {
+    console.log('An error ocurred');
   });
 }
 
