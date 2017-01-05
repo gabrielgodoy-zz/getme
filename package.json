@@ -1,13 +1,18 @@
 {
   "name": "getme",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "description": "CLI utility for everyday tasks",
   "repository": {
     "type": "git",
     "url": "https://github.com/gabrielgodoy/getme"
   },
+  "watch": {
+    "build": "src/**/*.js"
+  },
   "scripts": {
     "build": "babel src -d dist",
+    "watch": "npm-watch",
+    "prepublish": "npm run build",
     "test": "mocha --colors --reporter spec ./src/**/*.test.js",
     "test:watch": "npm test -- --watch",
     "coverage": "istanbul cover --report text --config istanbul.yml _mocha ./src/**/*.js",
@@ -36,7 +41,7 @@
     "weather"
   ],
   "bin": {
-    "getme": "./src/index.js"
+    "getme": "./dist/index.js"
   },
   "babel": {
     "presets": [
@@ -70,6 +75,7 @@
     "mocha": "^3.2.0",
     "mocha-lcov-reporter": "^1.2.0",
     "nock": "^9.0.2",
+    "npm-watch": "^0.1.7",
     "rewire": "^2.5.2",
     "sinon": "^1.17.7",
     "sinon-chai": "^2.8.0"

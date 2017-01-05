@@ -1,5 +1,6 @@
 #! /usr/bin/env node
 const commander = require('commander');
+const chalk = require('chalk');
 const optSearch = require('./options/optSearch');
 const optWeather = require('./options/optWeather');
 const optIP = require('./options/optIP');
@@ -57,4 +58,14 @@ commander
   .description('Search string on Google')
   .action(query => optSearch(query));
 
+commander.on('*', (command) => {
+  console.log(`
+The command "${chalk.red(command)}" does not exist
+Please refer to the help section ${chalk.blue('getme -h')} for options
+  `);
+});
+
+// console.log(commander);
+
 commander.parse(process.argv);
+
