@@ -1,6 +1,6 @@
 {
   "name": "getme",
-  "version": "1.2.10",
+  "version": "1.2.11",
   "description": "CLI utility for everyday tasks",
   "repository": {
     "type": "git",
@@ -10,9 +10,9 @@
     "build": "src/**/*.js"
   },
   "scripts": {
-    "build": "babel src -d dist",
-    "watch": "npm-watch",
     "prepublish": "npm run build",
+    "build": "./node_modules/.bin/babel ./src -d dist",
+    "watch": "npm-watch",
     "test": "mocha --colors --reporter spec ./src/**/*.test.js",
     "test:watch": "npm test -- --watch",
     "coverage": "istanbul cover --report text --config istanbul.yml _mocha ./src/**/*.js",
