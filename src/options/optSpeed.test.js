@@ -11,11 +11,11 @@ const optSpeed = rewire('./optSpeed');
 const expect = chai.expect;
 chai.use(sinonChai);
 
-let consoleSpy;
+let consoleStub;
 
 describe('optSpeed', () => {
   beforeEach(() => {
-    consoleSpy = sinon.spy(console, 'log');
+    consoleStub = sinon.stub(console, 'log');
   });
 
   afterEach(() => {
@@ -44,7 +44,7 @@ describe('optSpeed', () => {
     optSpeed.__set__('speedTest', speedTestMock);
     optSpeed();
     setTimeout(() => {
-      expect(consoleSpy).to.have.been.calledWith(`
+      expect(consoleStub).to.have.been.calledWith(`
 Download ${chalk.green(999)} Mbps
 Upload ${chalk.blue(999)} Mbps
 Ping ${chalk.blue(999)} ms
@@ -67,7 +67,7 @@ Ping ${chalk.blue(999)} ms
 
     optSpeed();
     setTimeout(() => {
-      expect(consoleSpy).to.have.been.calledWith('An error ocurred');
+      expect(consoleStub).to.have.been.calledWith('An error ocurred');
       done();
     }, 300);
   });

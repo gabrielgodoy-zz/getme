@@ -14,7 +14,7 @@ chai.use(sinonChai);
 
 let responseMock;
 let commanderMock;
-let consoleSpy;
+let consoleStub;
 
 describe('optCurrency', () => {
   beforeEach(() => {
@@ -56,7 +56,7 @@ describe('optCurrency', () => {
       },
     });
 
-    consoleSpy = sinon.spy(console, 'log');
+    consoleStub = sinon.stub(console, 'log');
   });
 
   afterEach(() => {
@@ -74,7 +74,7 @@ describe('optCurrency', () => {
     const responseMockParsed = JSON.parse(responseMock);
 
     setTimeout(() => {
-      expect(consoleSpy).to.have.been.calledWith(`
+      expect(consoleStub).to.have.been.calledWith(`
 ${chalk.yellow('Base currency')} ${optCurrency.__get__('getCountryIcon')(responseMockParsed.base)}  ${chalk.cyan(responseMockParsed.base)}
 -------------\nCurrency Rates\n
 ${optCurrency.__get__('formatRates')(responseMockParsed.rates)}`);
@@ -103,7 +103,7 @@ ${optCurrency.__get__('formatRates')(responseMockParsed.rates)}`);
     optCurrency(commanderMock);
 
     setTimeout(() => {
-      expect(consoleSpy).to.have.been.calledWith(`
+      expect(consoleStub).to.have.been.calledWith(`
 ${chalk.yellow('Base currency')} ${optCurrency.__get__('getCountryIcon')(responseMockParsed.base)}  ${chalk.cyan(responseMockParsed.base)}
 -------------\nCurrency Rates\n
 ${optCurrency.__get__('formatRates')(responseMockParsed.rates)}`);
@@ -120,7 +120,7 @@ ${optCurrency.__get__('formatRates')(responseMockParsed.rates)}`);
     commanderMock = {};
     optCurrency(commanderMock);
     setTimeout(() => {
-      expect(consoleSpy).to.have.been.calledWith(`${chalk.red('Something went wrong in the API. Try in a few minutes')}`);
+      expect(consoleStub).to.have.been.calledWith(`${chalk.red('Something went wrong in the API. Try in a few minutes')}`);
       done();
     }, 300);
   });
@@ -134,7 +134,7 @@ ${optCurrency.__get__('formatRates')(responseMockParsed.rates)}`);
     commanderMock = { base: 'UWERSD' };
     optCurrency(commanderMock);
     setTimeout(() => {
-      expect(consoleSpy).to.have.been.calledWith(`${chalk.red('It was not possible to retrieve what you want')}`);
+      expect(consoleStub).to.have.been.calledWith(`${chalk.red('It was not possible to retrieve what you want')}`);
       done();
     }, 300);
   });

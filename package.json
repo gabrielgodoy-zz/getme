@@ -15,7 +15,7 @@
     "watch": "npm-watch",
     "test": "mocha --colors --reporter spec ./src/**/*.test.js",
     "test:watch": "npm test -- --watch",
-    "coverage": "istanbul cover --report text --config istanbul.yml _mocha ./src/**/*.js",
+    "coverage": "istanbul cover --report lcov --report text --config istanbul.yml _mocha ./src/**/*.js",
     "coveralls": "NODE_ENV=test istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly --config istanbul.yml -- -R spec ./src/**/*.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "lint": "eslint './src/**/*.js'",
     "precommit": "npm run lint && npm test"

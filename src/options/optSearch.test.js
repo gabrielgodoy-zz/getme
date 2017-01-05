@@ -12,13 +12,13 @@ chai.use(sinonChai);
 
 let queryMock;
 let childProcessStub;
-let consoleLogSpy;
+let consoleLogStub;
 
 describe('optSearch', () => {
   beforeEach(() => {
     queryMock = ['arg1', 'arg2'];
 
-    consoleLogSpy = sinon.spy(console, 'log');
+    consoleLogStub = sinon.stub(console, 'log');
     // Stub to prevent exec() from opening the browser while testing
     childProcessStub = sinon.stub(childProcess, 'exec');
   });
@@ -40,7 +40,7 @@ describe('optSearch', () => {
   it('Should log Searching message to user', (done) => {
     optSearch(queryMock);
     setTimeout(() => {
-      expect(consoleLogSpy).to.have.been.calledWith(chalk.blue('Searching for "arg1 arg2" on Google'));
+      expect(consoleLogStub).to.have.been.calledWith(chalk.blue('Searching for "arg1 arg2" on Google'));
       done();
     }, 300);
   });
