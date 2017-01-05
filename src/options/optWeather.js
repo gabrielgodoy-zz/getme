@@ -7,6 +7,27 @@ let spinner;
 const openWeatherPrefix = 'http://api.openweathermap.org/data/2.5/';
 const key = '59a950ae5e900327f88558d5cce6dfae';
 
+const emojis = {
+  '01d': 'sunny',
+  '02d': 'partly_sunny',
+  '03d': 'cloud',
+  '04d': 'cloud',
+  '09d': 'rain_cloud',
+  '10d': 'partly_sunny_rain',
+  '11d': 'partly_sunny_rain',
+  '13d': 'snowflake',
+  '50d': 'wind_blowing_face',
+  '01n': 'full_moon_with_face',
+  '02n': 'cloud',
+  '03n': 'cloud',
+  '04n': 'cloud',
+  '09n': 'rain_cloud',
+  '10n': 'rain_cloud',
+  '11n': 'lightning',
+  '13n': 'snowflake',
+  '50n': 'wind_blowing_face',
+};
+
 function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
@@ -24,46 +45,7 @@ function weatherUnitAPI(command, formatted = false) {
 }
 
 function getWeatherIcon(iconID) {
-  switch (iconID) {
-    case '01d':
-      return emoji.get('sunny');
-    case '02d':
-      return emoji.get('partly_sunny');
-    case '03d':
-      return emoji.get('cloud');
-    case '04d':
-      return emoji.get('cloud');
-    case '09d':
-      return emoji.get('rain_cloud');
-    case '10d':
-      return emoji.get('partly_sunny_rain');
-    case '11d':
-      return emoji.get('partly_sunny_rain');
-    case '13d':
-      return emoji.get('snowflake');
-    case '50d':
-      return emoji.get('wind_blowing_face');
-    case '01n':
-      return emoji.get('full_moon_with_face');
-    case '02n':
-      return emoji.get('cloud');
-    case '03n':
-      return emoji.get('cloud');
-    case '04n':
-      return emoji.get('cloud');
-    case '09n':
-      return emoji.get('rain_cloud');
-    case '10n':
-      return emoji.get('rain_cloud');
-    case '11n':
-      return emoji.get('lightning');
-    case '13n':
-      return emoji.get('snowflake');
-    case '50n':
-      return emoji.get('wind_blowing_face');
-    default:
-      return emoji.get('sunny');
-  }
+  return emoji.get(emojis[iconID] || 'sunny');
 }
 
 function getWeather(address, command) {
