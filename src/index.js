@@ -5,6 +5,7 @@ const optWeather = require('./options/optWeather');
 const optIP = require('./options/optIP');
 const optSpeed = require('./options/optSpeed');
 const optCurrency = require('./options/optCurrency');
+const optDefinition = require('./options/optDefinition');
 
 commander
   .version('1.2.6')
@@ -32,6 +33,13 @@ commander
   .option('-b, --base <baseCurrency>', 'Sets which base currency will be compared against the others (Default: USD)')
   .option('-s, --symbols <symbols>', 'Sets which currencies you want to compare against the base currency (Default: All currencies)')
   .action(command => optCurrency(command));
+
+commander
+  .command('definition')
+  .alias('d')
+  .option('-s, --synonym <word>', 'Get synonyms of a specific word')
+  .description('Get definition of words')
+  .action(command => optDefinition(command));
 
 commander
   .command('ip')

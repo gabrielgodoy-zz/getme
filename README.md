@@ -29,6 +29,8 @@ Install it globally
 |`cur, currency [base] [currs]`         | Get currency rates against a base currency (default base USD, default currencies All)                           |
 |`ip`                                   | Get public and network IP addresses                                                                             |
 |`speed`                                | Get internet speed based on [speedtest](http://www.speedtest.net/)                                              |
+|`d, definition [word]`                 | Get word definitions                                                                                            |
+|`d, definition -s [word]`              | Get synonyms of a specific word                                                                                 |
 
 
 ### Examples of usage
@@ -46,6 +48,10 @@ Install it globally
 `getme forecast` Forecast in celsius
 
 `getme forecast -f` Forecast in fahrenheit
+
+`getme definition chair` Get definitions for the word chair
+
+`getme definition -s teacher` Get synonyms for the word teacher
 
 `getme ip`
 
