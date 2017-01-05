@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "babel src -d dist",
+    "prepublish": "npm run build",
     "test": "mocha --colors --reporter spec ./src/**/*.test.js",
     "test:watch": "npm test -- --watch",
     "coverage": "istanbul cover --report text --config istanbul.yml _mocha ./src/**/*.js",
@@ -36,7 +37,7 @@
     "weather"
   ],
   "bin": {
-    "getme": "./src/index.js"
+    "getme": "./dist/index.js"
   },
   "babel": {
     "presets": [
