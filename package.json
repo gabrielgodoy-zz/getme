@@ -7,7 +7,6 @@
     "url": "https://github.com/gabrielgodoy/getme"
   },
   "scripts": {
-    "prepublish": "npm run build",
     "build": "babel src -d dist",
     "test": "mocha --colors --reporter spec ./src/**/*.test.js",
     "test:watch": "npm test -- --watch",
@@ -37,7 +36,7 @@
     "weather"
   ],
   "bin": {
-    "getme": "./dist/index.js"
+    "getme": "./src/index.js"
   },
   "babel": {
     "presets": [
