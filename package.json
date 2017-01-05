@@ -11,7 +11,7 @@
   },
   "scripts": {
     "prepublish": "npm run build",
-    "build": "babel src -d dist",
+    "build": "./node_modules/.bin/babel ./src -d dist",
     "watch": "npm-watch",
     "test": "mocha --colors --reporter spec ./src/**/*.test.js",
     "test:watch": "npm test -- --watch",
