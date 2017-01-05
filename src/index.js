@@ -65,7 +65,4 @@ Please refer to the help section ${chalk.blue('getme -h')} for options
   `);
 });
 
-// console.log(commander);
-
 commander.parse(process.argv);
-
