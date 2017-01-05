@@ -17,20 +17,20 @@ function formatLogMessage(definitions) {
       if (definition.synonymWord) {
         console.log(`------------------------
 ${chalk.yellow(definition.number)}. ${capitalize(definition.synonymWord)}
-${definition.definition}
+${definition.partOfSpeech ? chalk.yellow(definition.partOfSpeech) : ''} ${definition.definition}
 ${chalk.blue('Example: ')} ${definition.example}`);
       } else {
         console.log(`------------------------
-${chalk.yellow(definition.number)}. ${definition.definition}
+${chalk.yellow(definition.number)}. ${chalk.yellow(definition.partOfSpeech)} ${definition.definition}
 ${chalk.blue('Example: ')} ${definition.example}`);
       }
     } else if (definition.synonymWord) {
       console.log(`------------------------
 ${chalk.yellow(definition.number)}. ${capitalize(definition.synonymWord)}
-${definition.definition}`);
+${definition.partOfSpeech ? chalk.yellow(definition.partOfSpeech) : ''} ${definition.definition}`);
     } else {
       console.log(`------------------------
-${chalk.yellow(definition.number)}. ${definition.definition}`);
+${chalk.yellow(definition.number)}. ${definition.partOfSpeech ? chalk.yellow(definition.partOfSpeech) : ''} ${definition.definition}`);
     }
   });
 }
@@ -44,6 +44,7 @@ function formatDefinitions(parsedResponse) {
           const definitionObject = {
             number: `${index + 1}`,
             definition: `${capitalize(sense.definition[0])}`,
+            partOfSpeech: result.part_of_speech ? `[${result.part_of_speech}]` : '',
             example: `${capitalize(sense.examples[0].text)}`,
           };
           if (parsedResponse.url.indexOf('synonyms') > -1) {
@@ -53,6 +54,7 @@ function formatDefinitions(parsedResponse) {
         } else {
           const definitionObject = {
             number: `${index + 1}`,
+            partOfSpeech: result.part_of_speech ? `[${result.part_of_speech}]` : '',
             definition: `${capitalize(sense.definition[0])}`,
           };
           if (parsedResponse.url.indexOf('synonyms') > -1) {
