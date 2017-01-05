@@ -10,9 +10,9 @@
     "build": "src/**/*.js"
   },
   "scripts": {
+    "prepublish": "npm run build",
     "build": "babel src -d dist",
     "watch": "npm-watch",
-    "prepublish": "npm run build",
     "test": "mocha --colors --reporter spec ./src/**/*.test.js",
     "test:watch": "npm test -- --watch",
     "coverage": "istanbul cover --report text --config istanbul.yml _mocha ./src/**/*.js",
