@@ -1,4 +1,6 @@
-const speedTest = require('speedtest-net');
+/* eslint-disable prefer-const */
+
+let speedTest = require('speedtest-net');
 const chalk = require('chalk');
 const ora = require('ora');
 
@@ -19,8 +21,8 @@ Upload ${chalk.blue(data.speeds.upload)} Mbps
 Ping ${chalk.blue(data.server.ping)} ms
 `);
   });
-  test.on('error', (err) => {
-    console.error(`An error ocurred, ${err}`);
+  test.on('error', () => {
+    console.log('An error ocurred');
   });
 }
 
