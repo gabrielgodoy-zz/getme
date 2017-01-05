@@ -8,7 +8,7 @@ const optCurrency = require('./options/optCurrency');
 const optDefinition = require('./options/optDefinition');
 
 commander
-  .version('1.2.8')
+  .version('1.2.9')
   .command('weather')
   .alias('w')
   .description('Get weather')
