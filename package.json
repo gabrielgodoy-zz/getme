@@ -6,8 +6,12 @@
     "type": "git",
     "url": "https://github.com/gabrielgodoy/getme"
   },
+  "watch": {
+    "build": "src/**/*.js"
+  },
   "scripts": {
     "build": "babel src -d dist",
+    "watch": "npm-watch",
     "prepublish": "npm run build",
     "test": "mocha --colors --reporter spec ./src/**/*.test.js",
     "test:watch": "npm test -- --watch",
@@ -71,6 +75,7 @@
     "mocha": "^3.2.0",
     "mocha-lcov-reporter": "^1.2.0",
     "nock": "^9.0.2",
+    "npm-watch": "^0.1.7",
     "rewire": "^2.5.2",
     "sinon": "^1.17.7",
     "sinon-chai": "^2.8.0"

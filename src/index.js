@@ -1,12 +1,12 @@
 #! /usr/bin/env node
 const commander = require('commander');
+const chalk = require('chalk');
 const optSearch = require('./options/optSearch');
 const optWeather = require('./options/optWeather');
 const optIP = require('./options/optIP');
 const optSpeed = require('./options/optSpeed');
 const optCurrency = require('./options/optCurrency');
 const optDefinition = require('./options/optDefinition');
-const optTranslate = require('./options/optTranslate');
 
 commander
   .version('1.2.9')
@@ -26,15 +26,6 @@ commander
   .option('-f, --fahrenheit', 'Get the weather in fahrenheit unit')
   .option('-k, --kelvin', 'Get the weather in kelvin unit')
   .action(command => optWeather(command));
-
-commander
-  .command('translation')
-  .alias('t')
-  .option('-l, --list', 'List all possible language combinations of translation to insert on --fromto')
-  .option('-ft, --fromto <languages>', 'The translation direction. As a pair of language codes separated by a hyphen ("from"-"to"). For example, en-ru indicates translating from English to Russian.')
-  .option('-t, --text [text...]', 'Insert all the text you want to translate after this flag')
-  .description('Get translations for words')
-  .action(command => optTranslate(command));
 
 commander
   .command('currency')
@@ -67,4 +58,14 @@ commander
   .description('Search string on Google')
   .action(query => optSearch(query));
 
+commander.on('*', (command) => {
+  console.log(`
+The command "${chalk.red(command)}" does not exist
+Please refer to the help section ${chalk.blue('getme -h')} for options
+  `);
+});
+
+// console.log(commander);
+
 commander.parse(process.argv);
+

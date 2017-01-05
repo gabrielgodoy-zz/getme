@@ -29,9 +29,8 @@ Install it globally
 |`cur, currency [base] [currs]`         | Get currency rates against a base currency (default base USD, default currencies All)       |
 |`ip`                                   | Get public and network IP addresses                                                         |
 |`speed`                                | Get internet speed based on [speedtest](http://www.speedtest.net/)                          |
-|`d, definition [word]`                 | Get word definitions                                                                        |
-|`d, definition -s [word]`              | Get synonyms of a specific word                                                             |
-|`t, translation [options]`             | Get translations of text from a language to another                                         |
+|`d, definition [word]`                 | Get word definitions (Only works for english words)                                         |
+|`d, definition -s [word]`              | Get synonyms of a specific word (Only works for english words)                              |
 
 
 ### Examples of getmes
@@ -61,23 +60,11 @@ For entire list of possible currency initials:
 
 `getme forecast -f` Forecast of five days ahead in fahrenheit
 
-#### Get word definitions (Only works for english words for now)
+#### Get word definitions (Only works for english words)
 `getme definition chair` Get definitions for the word chair
 
 #### Get word synonyms
 `getme definition -s teacher` Get synonyms for the word teacher
-
-#### Get text translations
-`getme translation --fromto en-pt --text the book is on the table` Translate from English to Portuguese "the book is on the table" becomes "o livro está sobre a mesa"
-
-`getme translation --fromto pt-ru --text o livro está sobre a mesa` Translate from Portuguese to Russian "o livro está sobre a mesa" becomes "книга на столе"
-
-`--fromto` works as a pair of language codes separated by a hyphen ("from"-"to"). For example, en-ru indicates translating from English to Russian.
-
-Every text after the `--text` flag will be interpreted as text to be translated
-
-##### To get all pair of languages available for translation, type
-`getme translation --list`
 
 #### Get you public and network IP addresses
 `getme ip`
