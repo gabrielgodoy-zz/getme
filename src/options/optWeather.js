@@ -45,7 +45,7 @@ function weatherUnitAPI(command, formatted = false) {
 }
 
 function getWeatherIcon(iconID) {
-  return emoji.get(emojis[iconID] || 'sunny');
+  return emoji.get(emojis[iconID]);
 }
 
 function getWeather(address, command) {

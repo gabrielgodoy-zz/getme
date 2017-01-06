@@ -12,50 +12,15 @@ const optCurrency = rewire('./optCurrency');
 const expect = chai.expect;
 chai.use(sinonChai);
 
+const stubs = require('../../stubs/currency');
+
 let responseMock;
 let commanderMock;
 let consoleStub;
 
 describe('optCurrency', () => {
   beforeEach(() => {
-    responseMock = JSON.stringify({
-      base: 'USD',
-      date: '2017-01-04',
-      rates: {
-        AUD: 1.3771,
-        BGN: 1.8739,
-        BRL: 3.2369,
-        CAD: 1.3312,
-        CHF: 1.0259,
-        CNY: 6.9351,
-        CZK: 25.89,
-        DKK: 7.123,
-        GBP: 0.81388,
-        HKD: 7.7559,
-        HRK: 7.2567,
-        HUF: 295.44,
-        IDR: 13384.0,
-        ILS: 3.8567,
-        INR: 68.065,
-        JPY: 117.51,
-        KRW: 1199.5,
-        MXN: 21.147,
-        MYR: 4.4975,
-        NOK: 8.6141,
-        NZD: 1.4395,
-        PHP: 49.642,
-        PLN: 4.1945,
-        RON: 4.3198,
-        RUB: 60.753,
-        SEK: 9.125,
-        SGD: 1.4417,
-        THB: 35.81,
-        TRY: 3.5822,
-        ZAR: 13.645,
-        EUR: 0.95813,
-      },
-    });
-
+    responseMock = stubs.response;
     consoleStub = sinon.stub(console, 'log');
   });
 
