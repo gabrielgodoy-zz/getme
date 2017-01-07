@@ -20,7 +20,7 @@ let responseAddressMock;
 let weatherResponseMock;
 let forecastResponseMock;
 
-describe('optSpeed', () => {
+describe('optWeather', () => {
   beforeEach(() => {
     responseAPIMock = JSON.stringify({ ip: '179.215.28.27' }); // Response is valid JSON
 
@@ -67,7 +67,10 @@ describe('optSpeed', () => {
     commanderMock.name = () => 'weather';
     optWeather(commanderMock);
     setTimeout(() => {
-      expect(consoleStub).to.have.been.called;
+      expect(consoleStub).to.have.been.calledWithMatch(/Niterói, Brazil | Wed Jan 04 2017/);
+      expect(consoleStub).to.have.been.calledWithMatch(/30.57 °C/);
+      expect(consoleStub).to.have.been.calledWithMatch(/28 °C/);
+      expect(consoleStub).to.have.been.calledWithMatch(/33 °C/);
       done();
     }, 300);
   });
@@ -87,7 +90,19 @@ describe('optSpeed', () => {
     commanderMock.name = () => 'forecast';
     optWeather(commanderMock);
     setTimeout(() => {
-      expect(consoleStub).to.have.been.called;
+      JSON.parse(forecastResponseMock).list
+        .forEach((item) => {
+          const { temp, temp_min: tempMin, temp_max: tempMax } = item.main;
+          if (new Date(item.dt).getHours() === 12) {
+            expect(consoleStub).to.have.been.calledWithMatch(temp);
+            expect(consoleStub).to.have.been.calledWithMatch(tempMin);
+            expect(consoleStub).to.have.been.calledWithMatch(tempMax);
+          } else {
+            expect(consoleStub).not.to.have.been.calledWithMatch(temp);
+            expect(consoleStub).not.to.have.been.calledWithMatch(tempMin);
+            expect(consoleStub).not.to.have.been.calledWithMatch(tempMax);
+          }
+        });
       done();
     }, 300);
   });

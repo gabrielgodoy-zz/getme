@@ -48,6 +48,39 @@ function getWeatherIcon(iconID) {
   return emoji.get(emojis[iconID]);
 }
 
+function logWeather(address, date, weatherObject, weatherUnit) {
+  const { icon, main, description } = weatherObject.weather[0];
+  const { city, country } = address;
+  const { temp, temp_min: tempMin, temp_max: tempMax } = weatherObject.main;
+  console.log(`${city}, ${country} | ${chalk.yellow(date.toDateString())}`);
+  console.log(`${getWeatherIcon(icon)}  ${main} | ${capitalize(description)}`);
+  console.log(`Temperature ${chalk.blue(temp, weatherUnit)}`);
+  console.log(`Min. ${chalk.blue(tempMin, weatherUnit)} | Max. ${chalk.blue(tempMax, weatherUnit)}`);
+  console.log();
+}
+
+function logForecast(address, weatherObject, weatherUnit) {
+  console.log(`${address.city}, ${address.country}`);
+  weatherObject.list
+    .map((weather) => {
+      const date = new Date(weather.dt_txt);
+      const { icon, main, description } = weather.weather[0];
+      const { temp, temp_min: tempMin, temp_max: tempMax } = weather.main;
+
+      return { date, icon, main, description, temp, tempMin, tempMax };
+    })
+    .filter(weather => weather.date.getHours() === 12)
+    .forEach((weather) => {
+      const { date, icon, main, description, temp, tempMin, tempMax } = weather;
+      console.log();
+      console.log(`${chalk.yellow(date.toDateString(), ' | ', date.getHours(), 'h')}`);
+      console.log(`${getWeatherIcon(icon)}  ${main} | ${capitalize(description)}`);
+      console.log(`Temperature ${chalk.blue(temp, weatherUnit)}`);
+      console.log(`Min. ${chalk.blue(tempMin, weatherUnit)} | Max. ${chalk.blue(tempMax, weatherUnit)}`);
+      console.log();
+    });
+}
+
 function getWeather(address, command) {
   const searchType = command.name() === 'weather' ? 'weather' : 'forecast';
   const latAndLon = `lat=${address.lat}&lon=${address.lon}`;
@@ -60,27 +93,12 @@ function getWeather(address, command) {
     if (!error && response.statusCode === 200) {
       const weatherObject = JSON.parse(body);
 
+      console.log();
       if (command.name() === 'weather') {
         const date = new Date(weatherObject.dt * 1000);
-        console.log(`
-${address.city}, ${address.country} | ${chalk.yellow(date.toDateString())}
-${getWeatherIcon(weatherObject.weather[0].icon)}  ${weatherObject.weather[0].main} | ${capitalize(weatherObject.weather[0].description)}
-Temperature ${chalk.blue(weatherObject.main.temp, formattedWeatherUnit)}
-Min. ${chalk.blue(weatherObject.main.temp_min, formattedWeatherUnit)} | Max. ${chalk.blue(weatherObject.main.temp_max, formattedWeatherUnit)}`);
+        logWeather(address, date, weatherObject, formattedWeatherUnit);
       } else {
-        console.log(`
-${address.city}, ${address.country}`);
-        weatherObject.list.forEach((weather) => {
-          if (weather.dt_txt.indexOf('12') > -1) {
-            const date = new Date(weather.dt_txt);
-            console.log(`
-${chalk.yellow(date.toDateString(), ' | ', date.getHours(), 'h')}
-${getWeatherIcon(weather.weather[0].icon)}  ${weather.weather[0].main} | ${capitalize(weather.weather[0].description)}
-Temperature ${chalk.blue(weather.main.temp, formattedWeatherUnit)}
-Min. ${chalk.blue(weather.main.temp_min, formattedWeatherUnit)} | Max. ${chalk.blue(weather.main.temp_max, formattedWeatherUnit)}
-            `);
-          }
-        });
+        logForecast(address, weatherObject, formattedWeatherUnit);
       }
     }
   });
