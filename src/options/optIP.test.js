@@ -11,7 +11,7 @@ const optIP = require('./optIP');
 const expect = chai.expect;
 chai.use(sinonChai);
 
-let consoleSpy;
+let consoleStub;
 let responseMock;
 let networkInterfacesMock;
 
@@ -70,7 +70,7 @@ describe('optIP', () => {
     };
     responseMock = JSON.stringify({ ip: '179.215.28.27' }); // Response is valid JSON
 
-    consoleSpy = sinon.spy(console, 'log');
+    consoleStub = sinon.stub(console, 'log');
     sinon.stub(os, 'networkInterfaces').returns(networkInterfacesMock);
   });
 
@@ -87,7 +87,7 @@ describe('optIP', () => {
 
     optIP();
     setTimeout(() => {
-      expect(consoleSpy).to.have.been.calledWith(`
+      expect(consoleStub).to.have.been.calledWith(`
 Public IP ${chalk.blue('179.215.28.27')}
 Network IP ${chalk.blue('192.168.0.21')}
 `);
@@ -103,7 +103,7 @@ Network IP ${chalk.blue('192.168.0.21')}
 
     optIP();
     setTimeout(() => {
-      expect(consoleSpy).to.have.been.calledWith('It was not possible to retrieve your IP this time');
+      expect(consoleStub).to.have.been.calledWith('It was not possible to retrieve your IP this time');
       done();
     }, 300);
   });

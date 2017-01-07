@@ -1,3 +1,4 @@
 instrumentation:
   excludes:
     - 'src/**/*.test.js'
+    - 'stubs/**/*.js'
