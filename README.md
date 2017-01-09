@@ -1,4 +1,4 @@
-## getme
+![getme](./getme-.png)
 CLI utility for everyday tasks
 
 With `getme` you can get weather, forecast, currency rate, upload files, IP address, word definitions, text translations, internet speed, do google searches and get inspirational quotes. 
