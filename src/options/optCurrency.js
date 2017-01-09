@@ -38,7 +38,7 @@ const emojis = {
 };
 
 function getCountryIcon(countryInitial) {
-  emoji.get(emojis[countryInitial]);
+  return emoji.get(emojis[countryInitial]);
 }
 
 function formatRates(rates) {
@@ -61,7 +61,7 @@ function optCurrency(command) {
     apiURL += `symbols=${command.symbols}`;
   }
 
-  request(apiURL, (error, response, body) => {
+  request(apiURL, (error, response, body) => { // eslint-disable-line consistent-return
     let apiResponse;
     try {
       apiResponse = JSON.parse(body);
@@ -74,10 +74,8 @@ function optCurrency(command) {
       console.log(chalk.red('It was not possible to retrieve what you want'));
       return false;
     }
-    return console.log(`
-${chalk.yellow('Base currency')} ${getCountryIcon(apiResponse.base)}  ${chalk.cyan(apiResponse.base)}
--------------\nCurrency Rates\n
-${formatRates(apiResponse.rates)}`);
+    console.log(`\n${chalk.yellow('Base currency')} ${getCountryIcon(apiResponse.base)}  ${chalk.cyan(apiResponse.base)}`);
+    console.log(`\nCurrency Rates\n\n${formatRates(apiResponse.rates)}`);
   });
 }
 
