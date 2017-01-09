@@ -40,6 +40,16 @@ Install it globally
 `getme search dogs and cats` Opens browser, searching for "dogs and cats"
 
 
+## Get Weather
+`getme weather` Weather in celsius
+
+`getme weather -f` Weather in fahrenheit
+
+`getme forecast` Forecast of five days ahead in celsius
+
+`getme forecast -f` Forecast of five days ahead in fahrenheit
+
+
 ## Get Currency
 `getme currency -s JPY,BRL,CAD` Get JPY, BRL and CAD currencies where base currency is USD (USD is default if no base currency is set)
 
@@ -54,14 +64,12 @@ For entire list of possible currency initials:
 [European Central Bank](http://www.ecb.europa.eu/stats/exchange/eurofxref/html/index.en.html)
 
 
-## Get Weather
-`getme weather` Weather in celsius
+## Get you public and network IP addresses
+`getme ip`
 
-`getme weather -f` Weather in fahrenheit
 
-`getme forecast` Forecast of five days ahead in celsius
-
-`getme forecast -f` Forecast of five days ahead in fahrenheit
+## Get your internet download/upload speed, and your ping
+`getme speed`
 
 
 ## Get word definitions (Only works for english words)
@@ -84,6 +92,11 @@ All text after the `--text` flag will be interpreted as text to be translated
 To get a list of all the possible --fromto combinations, type
 
 `getme translation --list` or `getme translation -l`
+
+
+## Get inspirational quotes
+`getme quote`
+`getme q`
 
 
 ## Upload files and generate links
@@ -115,14 +128,4 @@ File is anonymous and is erased after link expires also, and cannot be retrieved
 Read more in [file.io](https://www.file.io/)
 
 
-## Get inspirational quotes
-`getme quote`
-`getme q`
 
-
-## Get you public and network IP addresses
-`getme ip`
-
-
-## Get your internet download/upload speed, and your ping
-`getme speed`

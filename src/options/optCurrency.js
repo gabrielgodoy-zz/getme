@@ -38,7 +38,7 @@ const emojis = {
 };
 
 function getCountryIcon(countryInitial) {
-  emoji.get(emojis[countryInitial]);
+  return emoji.get(emojis[countryInitial]);
 }
 
 function formatRates(rates) {
@@ -74,6 +74,7 @@ function optCurrency(command) {
       console.log(chalk.red('It was not possible to retrieve what you want'));
       return false;
     }
+    console.log('apiResponse.base', apiResponse.base, getCountryIcon(apiResponse.base));
     return console.log(`
 ${chalk.yellow('Base currency')} ${getCountryIcon(apiResponse.base)}  ${chalk.cyan(apiResponse.base)}
 -------------\nCurrency Rates\n
