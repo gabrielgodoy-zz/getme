@@ -16,8 +16,6 @@ Install it globally
 
 `npm i getme -g`
 
-![Demo](demo.gif)
-
 ### Getme Options
 
 | command                               | definition                                                                                  |
@@ -39,6 +37,7 @@ Install it globally
 ## Search on Google
 `getme search dogs and cats` Opens browser, searching for "dogs and cats"
 
+![getme-search](./gifs/getme-search.gif)
 
 ## Get Weather
 `getme weather` Weather in celsius
@@ -49,11 +48,14 @@ Install it globally
 
 `getme forecast -f` Forecast of five days ahead in fahrenheit
 
+![getme-weather](./gifs/getme-weather.gif)
 
 ## Get Currency
 `getme currency -s JPY,BRL,CAD` Get JPY, BRL and CAD currencies where base currency is USD (USD is default if no base currency is set)
 
 `getme currency -b EUR -s USD,BRL` Get USD and BRL currency where base currency is EUR
+
+![getme-currency](./gifs/getme-currency.gif)
 
 ##### Currency options
 Most common base currencies to be passed as parameter:
@@ -67,14 +69,17 @@ For entire list of possible currency initials:
 ## Get you public and network IP addresses
 `getme ip`
 
+![getme-ip](./gifs/getme-ip.gif)
 
 ## Get your internet download/upload speed, and your ping
 `getme speed`
 
+![getme-speed](./gifs/getme-speed.gif)
 
 ## Get word definitions (Only works for english words)
 `getme definition chair` Get definitions for the word chair
 
+![getme-definition](./gifs/getme-definition.gif)
 
 ## Get word synonyms
 `getme definition -s teacher` Get synonyms for the word teacher
@@ -94,10 +99,13 @@ To get a list of all the possible --fromto combinations, type
 `getme translation --list` or `getme translation -l`
 
 
+![getme-translation](./gifs/getme-translation.gif)
+
 ## Get inspirational quotes
 `getme quote`
 `getme q`
 
+![getme-quote](./gifs/getme-quote.gif)
 
 ## Upload files and generate links
 
@@ -118,6 +126,8 @@ Expiration can be in
 - weeks. Example: '1w', '5w'
 - months. Example: '1m', '5m'
 - years. Example: '1y', '5y'
+
+![getme-upload](./gifs/getme-upload.gif)
 
 Important:
 

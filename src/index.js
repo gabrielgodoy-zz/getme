@@ -12,7 +12,7 @@ const optUpload = require('./options/optUpload');
 const optQuote = require('./options/optQuote');
 
 commander
-  .version('1.2.9')
+  .version('1.3.3')
   .command('weather')
   .alias('w')
   .description('Get weather')
