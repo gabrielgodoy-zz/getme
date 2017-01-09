@@ -15,22 +15,22 @@ function formatLogMessage(definitions) {
   definitions.forEach((definition) => {
     if (definition.example) {
       if (definition.synonymWord) {
-        console.log(`------------------------
-${chalk.yellow(definition.number)}. ${capitalize(definition.synonymWord)}
-${definition.partOfSpeech ? chalk.yellow(definition.partOfSpeech) : ''} ${definition.definition}
-${chalk.blue('Example: ')} ${definition.example}`);
+        console.log('------------------------');
+        console.log(`${chalk.yellow(definition.number)}. ${capitalize(definition.synonymWord)}`);
+        console.log(`${definition.partOfSpeech ? chalk.yellow(definition.partOfSpeech) : ''} ${definition.definition}`);
+        console.log(`${chalk.blue('Example: ')} ${definition.example}`);
       } else {
-        console.log(`------------------------
-${chalk.yellow(definition.number)}. ${chalk.yellow(definition.partOfSpeech)} ${definition.definition}
-${chalk.blue('Example: ')} ${definition.example}`);
+        console.log('------------------------');
+        console.log(`${chalk.yellow(definition.number)}. ${chalk.yellow(definition.partOfSpeech)} ${definition.definition}`);
+        console.log(`${chalk.blue('Example: ')} ${definition.example}`);
       }
     } else if (definition.synonymWord) {
-      console.log(`------------------------
-${chalk.yellow(definition.number)}. ${capitalize(definition.synonymWord)}
-${definition.partOfSpeech ? chalk.yellow(definition.partOfSpeech) : ''} ${definition.definition}`);
+      console.log('------------------------');
+      console.log(`${chalk.yellow(definition.number)}. ${capitalize(definition.synonymWord)}`);
+      console.log(`${definition.partOfSpeech ? chalk.yellow(definition.partOfSpeech) : ''} ${definition.definition}`);
     } else {
-      console.log(`------------------------
-${chalk.yellow(definition.number)}. ${definition.partOfSpeech ? chalk.yellow(definition.partOfSpeech) : ''} ${definition.definition}`);
+      console.log('------------------------');
+      console.log(`${chalk.yellow(definition.number)}. ${definition.partOfSpeech ? chalk.yellow(definition.partOfSpeech) : ''} ${definition.definition}`);
     }
   });
 }

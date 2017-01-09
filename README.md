@@ -1,7 +1,7 @@
 ## getme
 CLI utility for everyday tasks
 
-With `getme` you can get weather, forecast, currency rate, IP address, internet speed, or make google searches. 
+With `getme` you can get weather, forecast, currency rate, upload files, IP address, word definitions, text translations, internet speed, do google searches and get inspirational quotes. 
 
 ✨ All from the terminal ✨ 
 
@@ -31,10 +31,14 @@ Install it globally
 |`speed`                                | Get internet speed based on [speedtest](http://www.speedtest.net/)                          |
 |`d, definition [word]`                 | Get word definitions (Only works for english words)                                         |
 |`d, definition -s [word]`              | Get synonyms of a specific word (Only works for english words)                              |
+|`t, translation [options]`             | Get translations of text from a language to another                                         |
+|`q, quote`                             | Displays an inspirational quote and its author                                              |
+|`u, upload [filepath][options]`        | Uploads a file to file.io and generates a link for you to share that file                   |
 
 
 ## Search on Google
 `getme search dogs and cats` Opens browser, searching for "dogs and cats"
+
 
 ## Get Currency
 `getme currency -s JPY,BRL,CAD` Get JPY, BRL and CAD currencies where base currency is USD (USD is default if no base currency is set)
@@ -49,6 +53,7 @@ Most common base currencies to be passed as parameter:
 For entire list of possible currency initials: 
 [European Central Bank](http://www.ecb.europa.eu/stats/exchange/eurofxref/html/index.en.html)
 
+
 ## Get Weather
 `getme weather` Weather in celsius
 
@@ -58,14 +63,66 @@ For entire list of possible currency initials:
 
 `getme forecast -f` Forecast of five days ahead in fahrenheit
 
+
 ## Get word definitions (Only works for english words)
 `getme definition chair` Get definitions for the word chair
+
 
 ## Get word synonyms
 `getme definition -s teacher` Get synonyms for the word teacher
 
+
+## Get text translations
+`getme translation --fromto en-pt --text The book is on the table` Translate from English to Portuguese "the book is on the table" becomes "O livro está sobre a mesa"
+
+`getme translation --fromto es-en --text El libro está sobre la mesa` Translate from Spanish to English "El libro está sobre la mesa" becomes "The book is on the table"
+
+All text after the `--text` flag will be interpreted as text to be translated
+
+`--fromto` works as a pair of language codes separated by a hyphen ("from"-"to"). For example, en-ru indicates translating from English to Russian.
+
+To get a list of all the possible --fromto combinations, type
+
+`getme translation --list` or `getme translation -l`
+
+
+## Upload files and generate links
+
+Usage:
+`getme upload 'path/to/file'`
+Example: `getme upload ~/Desktop/test.txt`
+
+Setting custom link expiration
+
+Example: `getme upload ~/Desktop/test.txt -e 1w`
+
+File is uploaded and link will expire in one week
+
+If no expiration is declared, default link expiration is 14 days
+
+Expiration can be in 
+- days. Example: '1d', '10d'
+- weeks. Example: '1w', '5w'
+- months. Example: '1m', '5m'
+- years. Example: '1y', '5y'
+
+Important:
+
+After the file is downloaded from the generated link, just once, this link will no longer work, it will be destroyed. They call file.io the snapchat for files 
+
+File is anonymous and is erased after link expires also, and cannot be retrieved later by accesing the generated link
+
+Read more in [file.io](https://www.file.io/)
+
+
+## Get inspirational quotes
+`getme quote`
+`getme q`
+
+
 ## Get you public and network IP addresses
 `getme ip`
+
 
 ## Get your internet download/upload speed, and your ping
 `getme speed`
