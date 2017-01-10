@@ -42,9 +42,10 @@ function getCountryIcon(countryInitial) {
 }
 
 function formatRates(rates) {
-  return Object.keys(rates)
-          .map(rate => `${getCountryIcon(rate)}  ${rate} ${chalk.green(rates[rate])}\n-------------\n`)
-          .join('');
+  return Object
+    .keys(rates)
+    .map(rate => `${getCountryIcon(rate)}  ${rate} ${chalk.green(rates[rate])}\n-------------\n`)
+    .join('');
 }
 
 function optCurrency({ base = 'USD', symbols } = {}) {
@@ -70,7 +71,7 @@ function optCurrency({ base = 'USD', symbols } = {}) {
       console.log(chalk.red('It was not possible to retrieve what you want'));
       return false;
     }
-    
+
     console.log(`\n${chalk.yellow('Base currency')} ${getCountryIcon(apiResponse.base)}  ${chalk.cyan(apiResponse.base)}`);
     console.log(`\nCurrency Rates\n\n${formatRates(apiResponse.rates)}`);
   });
