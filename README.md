@@ -139,4 +139,13 @@ File is anonymous and is erased after link expires also, and cannot be retrieved
 Read more in [file.io](https://www.file.io/)
 
 
+## Contributing
 
+We'd love to have your helping hand on getme! 
+
+See [CONTRIBUTING.md](https://github.com/gabrielgodoy/getme/blob/master/CONTRIBUTING.md) for more information on what we're looking for and how to get started.
+
+
+## License
+
+[MIT License](https://gabrielgodoy.mit-license.org/license.html) @ [Gabriel Godoy](https://github.com/gabrielgodoy)
