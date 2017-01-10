@@ -42,27 +42,23 @@ function getCountryIcon(countryInitial) {
 }
 
 function formatRates(rates) {
-  const ratesArray = [];
-  Object.keys(rates).forEach((rate) => {
-    ratesArray.push(`${getCountryIcon(rate)}  ${rate} ${chalk.green(rates[rate])}\n-------------\n`);
-  });
-  return ratesArray.join('');
+  return Object.keys(rates)
+          .map(rate => `${getCountryIcon(rate)}  ${rate} ${chalk.green(rates[rate])}\n-------------\n`)
+          .join('');
 }
 
-function optCurrency(command) {
+function optCurrency({ base = 'USD', symbols } = {}) {
   let apiURL = 'http://api.fixer.io/latest?base=';
-  if ('base' in command) {
-    apiURL += `${command.base}&`;
-  } else {
-    apiURL += 'USD&';
-  }
 
-  if ('symbols' in command) {
-    apiURL += `symbols=${command.symbols}`;
+  apiURL += `${base}&`;
+
+  if (symbols) {
+    apiURL += `symbols=${symbols}`;
   }
 
   request(apiURL, (error, response, body) => { // eslint-disable-line consistent-return
     let apiResponse;
+
     try {
       apiResponse = JSON.parse(body);
     } catch (parseError) {
@@ -74,6 +70,7 @@ function optCurrency(command) {
       console.log(chalk.red('It was not possible to retrieve what you want'));
       return false;
     }
+    
     console.log(`\n${chalk.yellow('Base currency')} ${getCountryIcon(apiResponse.base)}  ${chalk.cyan(apiResponse.base)}`);
     console.log(`\nCurrency Rates\n\n${formatRates(apiResponse.rates)}`);
   });
