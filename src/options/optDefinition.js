@@ -13,65 +13,57 @@ function capitalize(string) {
 
 function formatLogMessage(definitions) {
   definitions.forEach((definition) => {
-    if (definition.example) {
-      if (definition.synonymWord) {
-        console.log('------------------------');
-        console.log(`${chalk.yellow(definition.number)}. ${capitalize(definition.synonymWord)}`);
-        console.log(`${definition.partOfSpeech ? chalk.yellow(definition.partOfSpeech) : ''} ${definition.definition}`);
-        console.log(`${chalk.blue('Example: ')} ${definition.example}`);
-      } else {
-        console.log('------------------------');
-        console.log(`${chalk.yellow(definition.number)}. ${chalk.yellow(definition.partOfSpeech)} ${definition.definition}`);
-        console.log(`${chalk.blue('Example: ')} ${definition.example}`);
-      }
-    } else if (definition.synonymWord) {
-      console.log('------------------------');
-      console.log(`${chalk.yellow(definition.number)}. ${capitalize(definition.synonymWord)}`);
-      console.log(`${definition.partOfSpeech ? chalk.yellow(definition.partOfSpeech) : ''} ${definition.definition}`);
+    const { example, synonymWord, number, definition: def, partOfSpeech } = definition;
+    let logMessage = `${partOfSpeech ? chalk.yellow(partOfSpeech) : ''} ${def}`;
+
+    console.log('------------------------');
+
+    if (synonymWord) {
+      console.log(`${chalk.yellow(number)}. ${capitalize(synonymWord)}`);
     } else {
-      console.log('------------------------');
-      console.log(`${chalk.yellow(definition.number)}. ${definition.partOfSpeech ? chalk.yellow(definition.partOfSpeech) : ''} ${definition.definition}`);
+      logMessage = `${chalk.yellow(number)}. ${logMessage}`;
+    }
+
+    console.log(logMessage);
+
+    if (example) {
+      console.log(`${chalk.blue('Example: ')} ${example}`);
     }
   });
 }
 
 function formatDefinitions(parsedResponse) {
-  const definitions = [];
-  parsedResponse.results.forEach((result, index) => {
-    result.senses.forEach((sense) => {
-      if ('definition' in sense) {
-        if ('examples' in sense) {
-          const definitionObject = {
-            number: `${index + 1}`,
-            definition: `${capitalize(sense.definition[0])}`,
-            partOfSpeech: result.part_of_speech ? `[${result.part_of_speech}]` : '',
-            example: `${capitalize(sense.examples[0].text)}`,
-          };
-          if (parsedResponse.url.indexOf('synonyms') > -1) {
-            definitionObject.synonymWord = result.headword;
-          }
-          definitions.push(definitionObject);
-        } else {
-          const definitionObject = {
-            number: `${index + 1}`,
-            partOfSpeech: result.part_of_speech ? `[${result.part_of_speech}]` : '',
-            definition: `${capitalize(sense.definition[0])}`,
-          };
-          if (parsedResponse.url.indexOf('synonyms') > -1) {
-            definitionObject.synonymWord = result.headword;
-          }
-          definitions.push(definitionObject);
-        }
+  const definitions = parsedResponse.results
+    .map((result, index) => result.senses
+    .filter(sense => sense.definition)
+    .map((sense) => {
+      const definitionObject = {
+        number: index + 1,
+        partOfSpeech: result.part_of_speech ? `[${result.part_of_speech}]` : '',
+        definition: `${capitalize(sense.definition[0])}`,
+      };
+
+      if (sense.examples) {
+        definitionObject.example = `${capitalize(sense.examples[0].text)}`;
       }
-    });
-  });
-  formatLogMessage(definitions);
+
+      if (parsedResponse.url.includes('synonyms')) {
+        definitionObject.synonymWord = result.headword;
+      }
+
+      return definitionObject;
+    }));
+
+  formatLogMessage([].concat(...definitions));
 }
 
 function optDefinition(word) {
   const headwordOrSynonyms = word.synonym ? 'synonyms' : 'headword';
-  request(`${wordsAPIPrefix}${headwordOrSynonyms}=${word.synonym ? word.synonym : word}&apikey=${KEYS.KEY}`, (error, response, body) => {
+  const url = `${wordsAPIPrefix}${headwordOrSynonyms}=${word.synonym ? word.synonym : word}&apikey=${KEYS.KEY}`;
+
+  request(url, (error, response, body) => {
     const parsedResponse = JSON.parse(body);
+
     if (parsedResponse.count === 0) {
       console.log(chalk.red('No matches found for that word'));
     } else {
