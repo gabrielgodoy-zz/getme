@@ -10,6 +10,7 @@ const optDefinition = require('./options/optDefinition');
 const optTranslate = require('./options/optTranslate');
 const optUpload = require('./options/optUpload');
 const optQuote = require('./options/optQuote');
+const optChuckNorris = require('./options/optChuckNorris');
 
 commander
   .version('1.3.3')
@@ -82,6 +83,11 @@ commander
   .alias('s')
   .description('Search string on Google')
   .action(query => optSearch(query));
+
+commander
+  .command('chuck')
+  .description('Get Chuck Norris facts')
+  .action(command => optChuckNorris(command));
 
 commander.on('*', (command) => {
   console.log(`The command "${chalk.red(command)}" does not exist`);
