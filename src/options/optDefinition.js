@@ -1,4 +1,4 @@
-const request = require('request');
+const axios = require('axios');
 const chalk = require('chalk');
 
 const wordsAPIPrefix = 'https://api.pearson.com/v2/dictionaries/ldoce5/entries?';
@@ -57,19 +57,22 @@ function formatDefinitions(parsedResponse) {
   formatLogMessage([].concat(...definitions));
 }
 
-function optDefinition(word) {
+async function optDefinition(word) {
   const headwordOrSynonyms = word.synonym ? 'synonyms' : 'headword';
-  const url = `${wordsAPIPrefix}${headwordOrSynonyms}=${word.synonym ? word.synonym : word}&apikey=${KEYS.KEY}`;
+  const value = word.synonym ? word.synonym : word;
 
-  request(url, (error, response, body) => {
-    const parsedResponse = JSON.parse(body);
-
-    if (parsedResponse.count === 0) {
-      console.log(chalk.red('No matches found for that word'));
-    } else {
-      formatDefinitions(parsedResponse);
-    }
+  const { data: response } = await axios.get(wordsAPIPrefix, {
+    params: {
+      [headwordOrSynonyms]: value,
+      apiKey: KEYS.KEY,
+    },
   });
+
+  if (response.count === 0) {
+    console.log(chalk.red('No matches found for that word'));
+  } else {
+    formatDefinitions(response);
+  }
 }
 
 module.exports = optDefinition;
