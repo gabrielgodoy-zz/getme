@@ -7,6 +7,7 @@ const optIP = require('./options/optIP');
 const optSpeed = require('./options/optSpeed');
 const optCurrency = require('./options/optCurrency');
 const optDefinition = require('./options/optDefinition');
+const optChuckNorris = require('./options/optChuckNorris');
 
 commander
   .version('1.2.9')
@@ -57,6 +58,11 @@ commander
   .alias('s')
   .description('Search string on Google')
   .action(query => optSearch(query));
+
+commander
+  .command('chuck')
+  .description('Get Chuck Norris facts')
+  .action(command => optChuckNorris(command));
 
 commander.on('*', (command) => {
   console.log(`
