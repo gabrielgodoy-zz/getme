@@ -1,0 +1,9 @@
+{
+  "plugins": ["transform-runtime"],
+  "presets": ["es2015", "stage-3"],
+  "env": {
+    "test": {
+      "plugins": ["rewire"]
+    }
+  }
+}
