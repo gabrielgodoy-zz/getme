@@ -1,7 +1,7 @@
-const axios = require('axios');
-const chalk = require('chalk');
-const ora = require('ora');
-const os = require('os');
+import axios from 'axios';
+import chalk from 'chalk';
+import ora from 'ora';
+import os from 'os';
 
 const spinner = ora({
   text: 'Loading IPs',

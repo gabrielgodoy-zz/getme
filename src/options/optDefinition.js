@@ -1,5 +1,5 @@
-const axios = require('axios');
-const chalk = require('chalk');
+import axios from 'axios';
+import chalk from 'chalk';
 
 const wordsAPIPrefix = 'https://api.pearson.com/v2/dictionaries/ldoce5/entries?';
 const KEYS = {

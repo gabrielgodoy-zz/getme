@@ -1,6 +1,6 @@
-const axios = require('axios');
-const chalk = require('chalk');
-const emoji = require('node-emoji');
+import axios from 'axios';
+import chalk from 'chalk';
+import emoji from 'node-emoji';
 
 const emojis = {
   USD: 'flag-us',
