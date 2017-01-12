@@ -1,6 +1,7 @@
 #! /usr/bin/env node
 const commander = require('commander');
 const chalk = require('chalk');
+const currVersion = require('../package.json').version;
 const optSearch = require('./options/optSearch');
 const optWeather = require('./options/optWeather');
 const optIP = require('./options/optIP');
@@ -13,7 +14,7 @@ const optQuote = require('./options/optQuote');
 const optChuckNorris = require('./options/optChuckNorris');
 
 commander
-  .version('1.3.3')
+  .version(currVersion)
   .command('weather')
   .alias('w')
   .description('Get weather')

@@ -2,7 +2,7 @@
 
 CLI utility for everyday tasks
 
-With `getme` you can get weather, forecast, currency rate, upload files, IP address, word definitions, text translations, internet speed, do google searches and get inspirational quotes. 
+With `getme` you can get weather, forecast, currency rate, upload files, IP address, word definitions, text translations, internet speed, do google searches, get inspirational quotes and get Chuck Norris jokes. 
 
 ✨ All from the terminal ✨ 
 
@@ -21,18 +21,19 @@ Install it globally
 
 | command                               | definition                                                                                  |
 | --------------------------------------| :-------------------------------------------------------------------------------------------|
-|`-h, --help`                           | Output usage information                                                                    |
-|`s, search [query]`                    | Search in Google                                                                            |
-|`w, weather [unit]`                    | Get weather, default unit is Celsius, can be **celsius, fahrenheit, or kelvin**             |
-|`f, forecast [unit]`                   | Get weather forecast of 5 days ahead, default unit is Celsius                               |
-|`cur, currency [base] [currs]`         | Get currency rates against a base currency (default base USD, default currencies All)       |
-|`ip`                                   | Get public and network IP addresses                                                         |
-|`speed`                                | Get internet speed based on [speedtest](http://www.speedtest.net/)                          |
-|`d, definition [word]`                 | Get word definitions (Only works for english words)                                         |
-|`d, definition -s [word]`              | Get synonyms of a specific word (Only works for english words)                              |
-|`t, translation [options]`             | Get translations of text from a language to another                                         |
-|`q, quote`                             | Displays an inspirational quote and its author                                              |
-|`u, upload [filepath][options]`        | Uploads a file to file.io and generates a link for you to share that file                   |
+|`getme -h, --help`                     | Output usage information                                                                    |
+|`getme s, search [query]`              | Search in Google                                                                            |
+|`getme w, weather [unit]`              | Get weather, default unit is Celsius, can be **celsius, fahrenheit, or kelvin**             |
+|`getme f, forecast [unit]`             | Get weather forecast of 5 days ahead, default unit is Celsius                               |
+|`getme cur, currency [base] [currs]`   | Get currency rates against a base currency (default base USD, default currencies All)       |
+|`getme ip`                             | Get public and network IP addresses                                                         |
+|`getme speed`                          | Get internet speed based on [speedtest](http://www.speedtest.net/)                          |
+|`getme d, definition [word]`           | Get word definitions (Only works for english words)                                         |
+|`getme d, definition -s [word]`        | Get synonyms of a specific word (Only works for english words)                              |
+|`getme t, translation [options]`       | Get translations of text from a language to another                                         |
+|`getme q, quote`                       | Displays an inspirational quote and its author                                              |
+|`getme u, upload [filepath][options]`  | Uploads a file to file.io and generates a link for you to share that file                   |
+|`getme chuck`                          | Displays a random Chuck Norris joke                                                         |
 
 
 ## Search on Google
