@@ -3,7 +3,7 @@ const chalk = require('chalk');
 const ora = require('ora');
 
 const spinner = ora({
-  text: 'Wainting Chuck Norris, you have no option.',
+  text: 'Waiting Chuck Norris, you have no option.',
   color: 'yellow',
 });
 
