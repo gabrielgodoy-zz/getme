@@ -90,7 +90,7 @@ describe('optCurrency', () => {
     nock('http://api.fixer.io')
       .get('/latest')
       .query({ base: 'UWERSD' })
-      .reply(200, JSON.stringify({ error: 'Some error' }));
+      .reply(200, 'invalid_json');
 
     commanderMock = { base: 'UWERSD' };
     optCurrency(commanderMock);

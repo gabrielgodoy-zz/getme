@@ -1,4 +1,4 @@
-const request = require('request');
+const axios = require('axios');
 const chalk = require('chalk');
 const emoji = require('node-emoji');
 
@@ -48,33 +48,31 @@ function formatRates(rates) {
     .join('');
 }
 
-function optCurrency({ base = 'USD', symbols } = {}) {
-  let apiURL = 'http://api.fixer.io/latest?base=';
-
-  apiURL += `${base}&`;
+async function optCurrency({ base = 'USD', symbols } = {}) {
+  const apiURL = 'http://api.fixer.io/latest';
+  const params = { params: { base } };
 
   if (symbols) {
-    apiURL += `symbols=${symbols}`;
+    params.params.symbols = symbols;
   }
 
-  request(apiURL, (error, response, body) => { // eslint-disable-line consistent-return
-    let apiResponse;
+  try {
+    const response = await axios.get(apiURL, params);
+    const { data, status: statusCode } = response;
 
-    try {
-      apiResponse = JSON.parse(body);
-    } catch (parseError) {
-      console.log(chalk.red('Something went wrong in the API. Try in a few minutes'));
-      return parseError;
-    }
-
-    if ('error' in apiResponse) {
+    if (statusCode !== 200 || typeof data !== 'object') {
       console.log(chalk.red('It was not possible to retrieve what you want'));
       return false;
     }
 
-    console.log(`\n${chalk.yellow('Base currency')} ${getCountryIcon(apiResponse.base)}  ${chalk.cyan(apiResponse.base)}`);
-    console.log(`\nCurrency Rates\n\n${formatRates(apiResponse.rates)}`);
-  });
+    console.log(`\n${chalk.yellow('Base currency')} ${getCountryIcon(data.base)}  ${chalk.cyan(data.base)}`);
+    console.log(`\nCurrency Rates\n\n${formatRates(data.rates)}`);
+  } catch (err) {
+    console.log(chalk.red('Something went wrong in the API. Try in a few minutes'));
+    return err;
+  }
+
+  return false;
 }
 
 module.exports = optCurrency;
