@@ -39,10 +39,8 @@ describe('optCurrency', () => {
     const responseMockParsed = JSON.parse(responseMock);
 
     setTimeout(() => {
-      expect(consoleStub).to.have.been.calledWith(`
-${chalk.yellow('Base currency')} ${optCurrency.__get__('getCountryIcon')(responseMockParsed.base)}  ${chalk.cyan(responseMockParsed.base)}
--------------\nCurrency Rates\n
-${optCurrency.__get__('formatRates')(responseMockParsed.rates)}`);
+      expect(consoleStub).to.have.been.calledWith(`\n${chalk.yellow('Base currency')} ${optCurrency.__get__('getCountryIcon')(responseMockParsed.base)}  ${chalk.cyan(responseMockParsed.base)}`);
+      expect(consoleStub).to.have.been.calledWith(`\nCurrency Rates\n\n${optCurrency.__get__('formatRates')(responseMockParsed.rates)}`);
       done();
     }, 300);
   });
@@ -68,10 +66,8 @@ ${optCurrency.__get__('formatRates')(responseMockParsed.rates)}`);
     optCurrency(commanderMock);
 
     setTimeout(() => {
-      expect(consoleStub).to.have.been.calledWith(`
-${chalk.yellow('Base currency')} ${optCurrency.__get__('getCountryIcon')(responseMockParsed.base)}  ${chalk.cyan(responseMockParsed.base)}
--------------\nCurrency Rates\n
-${optCurrency.__get__('formatRates')(responseMockParsed.rates)}`);
+      expect(consoleStub).to.have.been.calledWith(`\n${chalk.yellow('Base currency')} ${optCurrency.__get__('getCountryIcon')(responseMockParsed.base)}  ${chalk.cyan(responseMockParsed.base)}`);
+      expect(consoleStub).to.have.been.calledWith(`\nCurrency Rates\n\n${optCurrency.__get__('formatRates')(responseMockParsed.rates)}`);
       done();
     }, 300);
   });

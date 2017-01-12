@@ -44,11 +44,9 @@ describe('optSpeed', () => {
     optSpeed.__set__('speedTest', speedTestMock);
     optSpeed();
     setTimeout(() => {
-      expect(consoleStub).to.have.been.calledWith(`
-Download ${chalk.green(999)} Mbps
-Upload ${chalk.blue(999)} Mbps
-Ping ${chalk.blue(999)} ms
-`);
+      expect(consoleStub).to.have.been.calledWith(`\nDownload ${chalk.green(999)} Mbps`);
+      expect(consoleStub).to.have.been.calledWith(`Upload ${chalk.blue(999)} Mbps`);
+      expect(consoleStub).to.have.been.calledWith(`Ping ${chalk.blue(999)} ms`);
       done();
     }, 300);
   });

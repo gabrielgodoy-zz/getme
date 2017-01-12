@@ -87,10 +87,7 @@ describe('optIP', () => {
 
     optIP();
     setTimeout(() => {
-      expect(consoleStub).to.have.been.calledWith(`
-Public IP ${chalk.blue('179.215.28.27')}
-Network IP ${chalk.blue('192.168.0.21')}
-`);
+      expect(consoleStub).to.have.been.calledWith(`\nPublic IP ${chalk.blue('179.215.28.27')}\nNetwork IP ${chalk.blue('192.168.0.21')}`);
       done();
     }, 300);
   });
