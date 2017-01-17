@@ -30,9 +30,22 @@ describe('optSearch', () => {
 
   it('Should call child_process.exec with correct search URL', (done) => {
     const queryGoogle = 'https://www.google.com/search?q=';
+    // mock process for proper open command call
+    Object.defineProperty(process, 'platform', {value: 'unix'});
     optSearch(queryMock);
     setTimeout(() => {
       expect(childProcessStub).to.have.been.calledWith(`open ${queryGoogle}${queryMock.join('+')}`);
+      done();
+    }, 300);
+  });
+
+  it('Should call child_process.exec with correct search URL and win32 open command', (done) => {
+    const queryGoogle = 'https://www.google.com/search?q=';
+    // mock process for proper open command call
+    Object.defineProperty(process, 'platform', {value: 'win32'});
+    optSearch(queryMock);
+    setTimeout(() => {
+      expect(childProcessStub).to.have.been.calledWith(`start ${queryGoogle}${queryMock.join('+')}`);
       done();
     }, 300);
   });
