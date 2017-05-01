@@ -6,9 +6,9 @@ notifications:
   email:
     on_success: never
     on_failure: always
-scripts:
+script:
   - npm run build
-  - npm test
   - npm run lint
+  - npm test
 after_success:
   - npm run coveralls
