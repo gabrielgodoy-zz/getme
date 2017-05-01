@@ -1,6 +1,7 @@
 #! /usr/bin/env node
 const commander = require('commander');
 const chalk = require('chalk');
+const currVersion = require('../package.json').version;
 const optSearch = require('./options/optSearch');
 const optWeather = require('./options/optWeather');
 const optIP = require('./options/optIP');
@@ -10,9 +11,10 @@ const optDefinition = require('./options/optDefinition');
 const optTranslate = require('./options/optTranslate');
 const optUpload = require('./options/optUpload');
 const optQuote = require('./options/optQuote');
+const optChuckNorris = require('./options/optChuckNorris');
 
 commander
-  .version('1.3.3')
+  .version(currVersion)
   .command('weather')
   .alias('w')
   .description('Get weather')
@@ -82,6 +84,11 @@ commander
   .alias('s')
   .description('Search string on Google')
   .action(query => optSearch(query));
+
+commander
+  .command('chuck')
+  .description('Get Chuck Norris facts')
+  .action(command => optChuckNorris(command));
 
 commander.on('*', (command) => {
   console.log(`The command "${chalk.red(command)}" does not exist`);
