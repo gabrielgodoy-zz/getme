@@ -33,7 +33,6 @@ function formatLogMessage(definitions) {
 }
 
 function formatDefinitions(parsedResponse) {
-
   const definitions = parsedResponse.results
     .map((result, index) => result.senses
     .filter(sense => sense.definition)
