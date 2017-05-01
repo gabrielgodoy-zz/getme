@@ -1,4 +1,4 @@
-export const forecastResponseMock = JSON.stringify({
+exports.forecastResponseMock = JSON.stringify({
   city: {
     id: 3473648,
     name: 'Icaraí',
