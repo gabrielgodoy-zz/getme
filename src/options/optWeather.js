@@ -127,4 +127,4 @@ function optWeather(command) {
   });
 }
 
-module.exports = optWeather;
+export default optWeather;

@@ -13,4 +13,4 @@ function optSearch(query) {
   }, 300);
 }
 
-module.exports = optSearch;
+export default optSearch;

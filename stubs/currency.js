@@ -1,4 +1,4 @@
-exports.response = JSON.stringify({
+export const response = JSON.stringify({
   base: 'USD',
   date: '2017-01-04',
   rates: {

@@ -47,7 +47,7 @@ function formatDefinitions(parsedResponse) {
             partOfSpeech: result.part_of_speech ? `[${result.part_of_speech}]` : '',
             example: `${capitalize(sense.examples[0].text)}`,
           };
-          if (parsedResponse.url.indexOf('synonyms') > -1) {
+          if (parsedResponse.url.includes('synonyms')) {
             definitionObject.synonymWord = result.headword;
           }
           definitions.push(definitionObject);
@@ -57,7 +57,7 @@ function formatDefinitions(parsedResponse) {
             partOfSpeech: result.part_of_speech ? `[${result.part_of_speech}]` : '',
             definition: `${capitalize(sense.definition[0])}`,
           };
-          if (parsedResponse.url.indexOf('synonyms') > -1) {
+          if (parsedResponse.url.includes('synonyms')) {
             definitionObject.synonymWord = result.headword;
           }
           definitions.push(definitionObject);
@@ -80,4 +80,4 @@ function optDefinition(word) {
   });
 }
 
-module.exports = optDefinition;
+export default optDefinition;

@@ -38,4 +38,4 @@ function optUpload(file, options) {
   form.append('file', fs.createReadStream(file));
 }
 
-module.exports = optUpload;
+export default optUpload;

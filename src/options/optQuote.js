@@ -10,4 +10,4 @@ function optQuote() {
   });
 }
 
-module.exports = optQuote;
+export default optQuote;
