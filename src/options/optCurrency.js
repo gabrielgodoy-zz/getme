@@ -77,4 +77,4 @@ function optCurrency({ base = 'USD', symbols } = {}) {
   });
 }
 
-export default optCurrency;
+module.exports = optCurrency;

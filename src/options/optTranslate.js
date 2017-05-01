@@ -59,4 +59,4 @@ function optTranslate(textToTranslateArray, options) {
   }
 }
 
-export default optTranslate;
+module.exports = optTranslate;

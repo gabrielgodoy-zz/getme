@@ -80,4 +80,4 @@ function optDefinition(word) {
   });
 }
 
-export default optDefinition;
+module.exports = optDefinition;

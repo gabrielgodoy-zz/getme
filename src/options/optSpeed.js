@@ -24,4 +24,4 @@ function optSpeed() {
   });
 }
 
-export default optSpeed;
+module.exports = optSpeed;

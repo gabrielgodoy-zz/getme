@@ -35,4 +35,5 @@ function optIP() {
   });
 }
 
-export default optIP;
+module.exports = optIP;
+
