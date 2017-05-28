@@ -12,6 +12,7 @@ const optTranslate = require('./options/optTranslate');
 const optUpload = require('./options/optUpload');
 const optQuote = require('./options/optQuote');
 const optChuckNorris = require('./options/optChuckNorris');
+const optTwitter = require('./options/optTwitter');
 
 commander
   .version(currVersion)
@@ -84,6 +85,12 @@ commander
   .alias('s')
   .description('Search string on Google')
   .action(query => optSearch(query));
+
+commander
+  .command('tweets [query...]')
+  .alias('t')
+  .description('Search string on Twitter')
+  .action(query => optTwitter(query));
 
 commander
   .command('chuck')
