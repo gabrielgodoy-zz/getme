@@ -2,6 +2,7 @@ const chalk = require('chalk');
 const https = require('https');
 const ora = require('ora');
 const OAuth2 = require('oauth').OAuth2;
+const urlencode = require('urlencode');
 
 const spinner = ora({
   text: 'Loading Twitter results, can take a few seconds',
@@ -12,13 +13,14 @@ const SECRET = 'uVWQhRBl3cqsgJsoBpblKpG6kfgeUffFInanfGEoRpQybx2Bcx';
 const oauth2 = new OAuth2(CONSUMER_KEY, SECRET, 'https://api.twitter.com/', null, 'oauth2/token', null);
 
 function searchTwitter(query, cb) {
+  const searchQuery = urlencode(`${query}`);
   spinner.start();
   oauth2.getOAuthAccessToken('', {
     grant_type: 'client_credentials',
   }, (error, accessToken) => {
     const options = {
       hostname: 'api.twitter.com',
-      path: `/1.1/search/tweets.json?q=${query}`,
+      path: `/1.1/search/tweets.json?q=${searchQuery}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -39,7 +41,7 @@ function searchTwitter(query, cb) {
 }
 
 function optTwitter(query) {
-  const searchQuery = query.join(',');
+  const searchQuery = query.join(' ');
   searchTwitter(searchQuery, (err, data) => {
     if (err) {
       spinner.stop();
@@ -48,13 +50,18 @@ function optTwitter(query) {
     }
 
     const tweets = data.statuses;
-    spinner.stop();
-    for (let i = 0; i < tweets.length; i + 1) {
-      const tweet = tweets[i];
-      console.log(`${chalk.yellow('From :')}  ${tweet.user.name}`);
-      console.log(`${chalk.yellow('Tweet :')}  ${tweet.text}`);
-      console.log(`${chalk.yellow('Time :')}  ${tweet.created_at} \n`);
+    if (!tweets.length) {
+      spinner.stop();
+      console.log('No tweets to show!');
+      process.exit();
     }
+    spinner.stop();
+    tweets.slice(10);
+    tweets.forEach((t) => {
+      console.log(`${chalk.yellow('From :')}  ${t.user.name}`);
+      console.log(`${chalk.yellow('Tweet :')}  ${t.text}`);
+      console.log(`${chalk.yellow('Time :')}  ${t.created_at} \n`);
+    });
   });
 }
 

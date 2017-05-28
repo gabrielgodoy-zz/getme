@@ -132,8 +132,10 @@ Expiration can be in
 ![getme-upload](./gifs/getme-upload.gif)
 
 ## Search on Twitter
-`getme tweets node npm`
+`getme tweets #node #npm`
 `getme t node npm`
+
+### Example
 
 Important:
 
