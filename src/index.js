@@ -12,6 +12,7 @@ const optTranslate = require('./options/optTranslate');
 const optUpload = require('./options/optUpload');
 const optQuote = require('./options/optQuote');
 const optChuckNorris = require('./options/optChuckNorris');
+const optGit = require('./options/optGit');
 
 commander
   .version(currVersion)
@@ -89,6 +90,11 @@ commander
   .command('chuck')
   .description('Get Chuck Norris facts')
   .action(command => optChuckNorris(command));
+
+commander
+  .command('git')
+  .description('Notifications from GitHub')
+  .action(command => optGit(command));
 
 commander.on('*', (command) => {
   console.log(`The command "${chalk.red(command)}" does not exist`);

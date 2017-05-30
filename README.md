@@ -2,9 +2,9 @@
 
 CLI utility for everyday tasks
 
-With `getme` you can get weather, forecast, currency rate, upload files, IP address, word definitions, text translations, internet speed, do google searches, get inspirational quotes and get Chuck Norris jokes. 
+With `getme` you can get weather, forecast, currency rate, upload files, IP address, word definitions, text translations, internet speed, do google searches, get inspirational quotes and get Chuck Norris jokes.
 
-✨ All from the terminal ✨ 
+✨ All from the terminal ✨
 
 [![NPM](https://nodei.co/npm/getme.png?downloads=true)](https://nodei.co/npm/getme/)
 
@@ -13,7 +13,7 @@ With `getme` you can get weather, forecast, currency rate, upload files, IP addr
 [![npm](https://img.shields.io/npm/dm/getme.svg)]()
 [![Coverage Status](https://coveralls.io/repos/github/gabrielgodoy/getme/badge.svg?branch=master)](https://coveralls.io/github/gabrielgodoy/getme?branch=master)
 
-Install it globally 
+Install it globally
 
 `npm i getme -g`
 
@@ -34,12 +34,16 @@ Install it globally
 |`getme q, quote`                       | Displays an inspirational quote and its author                                              |
 |`getme u, upload [filepath][options]`  | Uploads a file to file.io and generates a link for you to share that file                   |
 |`getme chuck`                          | Displays a random Chuck Norris joke                                                         |
+|`getme git`                            | Get new notifications from GitHub |
 
 
 ## Search on Google
 `getme search dogs and cats` Opens browser, searching for "dogs and cats"
 
 ![getme-search](./gifs/getme-search.gif)
+
+## Get GitHub Notifications
+`getme git` Option to open selected notification in browser also.
 
 ## Get Weather
 `getme weather` Weather in celsius
@@ -64,7 +68,7 @@ Most common base currencies to be passed as parameter:
 - USD (Dollar) Default
 - EUR (Euro)
 
-For entire list of possible currency initials: 
+For entire list of possible currency initials:
 [European Central Bank](http://www.ecb.europa.eu/stats/exchange/eurofxref/html/index.en.html)
 
 
@@ -123,7 +127,7 @@ File is uploaded and link will expire in one week
 
 If no expiration is declared, default link expiration is 14 days
 
-Expiration can be in 
+Expiration can be in
 - days. Example: '1d', '10d'
 - weeks. Example: '1w', '5w'
 - months. Example: '1m', '5m'
@@ -133,7 +137,7 @@ Expiration can be in
 
 Important:
 
-After the file is downloaded from the generated link, just once, this link will no longer work, it will be destroyed. They call file.io the snapchat for files 
+After the file is downloaded from the generated link, just once, this link will no longer work, it will be destroyed. They call file.io the snapchat for files
 
 File is anonymous and is erased after link expires also, and cannot be retrieved later by accesing the generated link
 
@@ -142,7 +146,7 @@ Read more in [file.io](https://www.file.io/)
 
 ## Contributing
 
-We'd love to have your helping hand on getme! 
+We'd love to have your helping hand on getme!
 
 See [CONTRIBUTING.md](https://github.com/gabrielgodoy/getme/blob/master/CONTRIBUTING.md) for more information on what we're looking for and how to get started.
 
