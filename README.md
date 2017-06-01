@@ -35,12 +35,16 @@ Install it globally
 |`getme q, quote`                       | Displays an inspirational quote and its author                                              |
 |`getme u, upload [filepath][options]`  | Uploads a file to file.io and generates a link for you to share that file                   |
 |`getme chuck`                          | Displays a random Chuck Norris joke                                                         |
+|`getme git`                            | Get new notifications from GitHub |
 
 
 ## Search on Google
 `getme search dogs and cats` Opens browser, searching for "dogs and cats"
 
 ![getme-search](./gifs/getme-search.gif)
+
+## Get GitHub Notifications
+`getme git` Option to open selected notification in browser also.
 
 ## Get Weather
 `getme weather` Weather in celsius
