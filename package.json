@@ -59,6 +59,7 @@
     "commander": "^2.9.0",
     "inquirer": "^3.0.6",
     "node-emoji": "^1.4.3",
+    "oauth": "^0.9.15",
     "ora": "^1.2.0",
     "request": "^2.81.0",
     "speedtest-net": "^1.2.11",
