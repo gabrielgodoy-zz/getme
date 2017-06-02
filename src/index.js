@@ -88,7 +88,7 @@ commander
 
 commander
   .command('tweets [query...]')
-  .alias('t')
+  .alias('tw')
   .description('Search string on Twitter')
   .action(query => optTwitter(query));
 
