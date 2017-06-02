@@ -1,17 +1,39 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-underscore-dangle */
 
-const chalk = require('chalk');
-const chai = require('chai');
-const sinonChai = require('sinon-chai');
-const sinon = require('sinon');
-const rewire = require('rewire');
+import chalk from 'chalk';
+import chai, { expect } from 'chai';
+import sinonChai from 'sinon-chai';
+import sinon from 'sinon';
+import rewire from 'rewire';
 
 const optSpeed = rewire('./optSpeed');
-const expect = chai.expect;
+
 chai.use(sinonChai);
 
+const wait = t => new Promise(r => setTimeout(r, t));
+
 let consoleStub;
+
+const dataMock = {
+  speeds: {
+    download: 999,
+    upload: 999,
+  },
+  server: {
+    ping: 999,
+  },
+};
+
+function speedTestMock() {
+  const obj = { on: () => {} };
+  sinon.stub(obj, 'on')
+    .withArgs('data', sinon.match.func)
+    .callsArgWith(1, dataMock)
+    .withArgs('error', sinon.match.func)
+    .callsArgWith(1, 'error');
+  return obj;
+}
 
 describe('optSpeed', () => {
   beforeEach(() => {
@@ -22,51 +44,24 @@ describe('optSpeed', () => {
     console.log.restore();
   });
 
-  it('should log to user internet speeds', (done) => {
-    const speedTestMock = function speedTestMock() {
-      return {
-        on: (event, callback) => {
-          if (event === 'data') {
-            const data = {
-              speeds: {
-                download: 999,
-                upload: 999,
-              },
-              server: {
-                ping: 999,
-              },
-            };
-            callback(data);
-          }
-        },
-      };
-    };
+  it('should log to user internet speeds', async () => {
     optSpeed.__set__('speedTest', speedTestMock);
     optSpeed();
-    setTimeout(() => {
-      expect(consoleStub).to.have.been.calledWith(`\nDownload ${chalk.green(999)} Mbps`);
-      expect(consoleStub).to.have.been.calledWith(`Upload ${chalk.blue(999)} Mbps`);
-      expect(consoleStub).to.have.been.calledWith(`Ping ${chalk.blue(999)} ms`);
-      done();
-    }, 300);
+
+    await wait(300);
+
+    expect(consoleStub).to.have.been.calledWith(`\nDownload ${chalk.green(999)} Mbps`);
+    expect(consoleStub).to.have.been.calledWith(`Upload ${chalk.blue(999)} Mbps`);
+    expect(consoleStub).to.have.been.calledWith(`Ping ${chalk.blue(999)} ms`);
   });
 
-  it('should log error message if some problem occurs', (done) => {
-    const speedTestMock = function speedTestMock() {
-      return {
-        on: (event, callback) => {
-          if (event === 'error') {
-            callback('error');
-          }
-        },
-      };
-    };
+  it('should log error message if some problem occurs', async () => {
     optSpeed.__set__('speedTest', speedTestMock);
 
     optSpeed();
-    setTimeout(() => {
-      expect(consoleStub).to.have.been.calledWith('An error ocurred');
-      done();
-    }, 300);
+
+    await wait(300);
+
+    expect(consoleStub).to.have.been.calledWith('An error ocurred');
   });
 });
