@@ -1,17 +1,19 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-underscore-dangle */
 
-const chai = require('chai');
-const sinonChai = require('sinon-chai');
-const sinon = require('sinon');
-const nock = require('nock');
-const rewire = require('rewire');
+import chai, { expect } from 'chai';
+import sinonChai from 'sinon-chai';
+import sinon from 'sinon';
+import nock from 'nock';
+import rewire from 'rewire';
 
 const optWeather = rewire('./optWeather');
-const expect = chai.expect;
+
 chai.use(sinonChai);
 
 const stubs = require('../../stubs/weather');
+
+const wait = t => new Promise(r => setTimeout(r, t));
 
 let consoleStub;
 let commanderMock;
@@ -52,7 +54,7 @@ describe('optWeather', () => {
     console.log.restore();
   });
 
-  it('should log weather', (done) => {
+  it('should log weather', async () => {
     const openWeatherPrefix = 'http://api.openweathermap.org';
     nock(openWeatherPrefix)
       .get('/data/2.5/weather')
@@ -66,16 +68,16 @@ describe('optWeather', () => {
 
     commanderMock.name = () => 'weather';
     optWeather(commanderMock);
-    setTimeout(() => {
-      expect(consoleStub).to.have.been.calledWithMatch(/Niterói, Brazil | Wed Jan 04 2017/);
-      expect(consoleStub).to.have.been.calledWithMatch(/30.57 °C/);
-      expect(consoleStub).to.have.been.calledWithMatch(/28 °C/);
-      expect(consoleStub).to.have.been.calledWithMatch(/33 °C/);
-      done();
-    }, 300);
+
+    await wait(300);
+
+    expect(consoleStub).to.have.been.calledWithMatch(/Niterói, Brazil | Wed Jan 04 2017/);
+    expect(consoleStub).to.have.been.calledWithMatch(/30.57 °C/);
+    expect(consoleStub).to.have.been.calledWithMatch(/28 °C/);
+    expect(consoleStub).to.have.been.calledWithMatch(/33 °C/);
   });
 
-  it('should log forecast', (done) => {
+  it('should log forecast', async () => {
     const openWeatherPrefix = 'http://api.openweathermap.org';
     nock(openWeatherPrefix)
       .get('/data/2.5/forecast')
@@ -89,25 +91,25 @@ describe('optWeather', () => {
 
     commanderMock.name = () => 'forecast';
     optWeather(commanderMock);
-    setTimeout(() => {
-      JSON.parse(forecastResponseMock).list
-        .forEach((item) => {
-          const { temp, temp_min: tempMin, temp_max: tempMax } = item.main;
-          if (new Date(item.dt).getHours() === 12) {
-            expect(consoleStub).to.have.been.calledWithMatch(temp);
-            expect(consoleStub).to.have.been.calledWithMatch(tempMin);
-            expect(consoleStub).to.have.been.calledWithMatch(tempMax);
-          } else {
-            expect(consoleStub).not.to.have.been.calledWithMatch(temp);
-            expect(consoleStub).not.to.have.been.calledWithMatch(tempMin);
-            expect(consoleStub).not.to.have.been.calledWithMatch(tempMax);
-          }
-        });
-      done();
-    }, 300);
+
+    await wait(300);
+
+    JSON.parse(forecastResponseMock).list
+      .forEach((item) => {
+        const { temp, temp_min: tempMin, temp_max: tempMax } = item.main;
+        if (new Date(item.dt).getHours() === 12) {
+          expect(consoleStub).to.have.been.calledWithMatch(temp);
+          expect(consoleStub).to.have.been.calledWithMatch(tempMin);
+          expect(consoleStub).to.have.been.calledWithMatch(tempMax);
+        } else {
+          expect(consoleStub).not.to.have.been.calledWithMatch(temp);
+          expect(consoleStub).not.to.have.been.calledWithMatch(tempMin);
+          expect(consoleStub).not.to.have.been.calledWithMatch(tempMax);
+        }
+      });
   });
 
-  it('should use fahrenheit', (done) => {
+  it('should use fahrenheit', async () => {
     const openWeatherPrefix = 'http://api.openweathermap.org';
     commanderMock.name = () => 'forecast';
     commanderMock.fahrenheit = true;
@@ -123,13 +125,13 @@ describe('optWeather', () => {
       .reply(200, forecastResponseMock);
 
     optWeather(commanderMock);
-    setTimeout(() => {
-      expect(consoleStub).to.have.been.calledWithMatch(/27.2 °F/);
-      done();
-    }, 300);
+
+    await wait(300);
+
+    expect(consoleStub).to.have.been.calledWithMatch(/27.2 °F/);
   });
 
-  it('should use celsius', (done) => {
+  it('should use celsius', async () => {
     const openWeatherPrefix = 'http://api.openweathermap.org';
     commanderMock.name = () => 'forecast';
     commanderMock.celsius = true;
@@ -145,13 +147,13 @@ describe('optWeather', () => {
       .reply(200, forecastResponseMock);
 
     optWeather(commanderMock);
-    setTimeout(() => {
-      expect(consoleStub).to.have.been.calledWithMatch(/27.2 °C/);
-      done();
-    }, 300);
+
+    await wait(300);
+
+    expect(consoleStub).to.have.been.calledWithMatch(/27.2 °C/);
   });
 
-  it('should use kelvin', (done) => {
+  it('should use kelvin', async () => {
     const openWeatherPrefix = 'http://api.openweathermap.org';
     commanderMock.name = () => 'forecast';
     commanderMock.kelvin = true;
@@ -167,9 +169,9 @@ describe('optWeather', () => {
       .reply(200, forecastResponseMock);
 
     optWeather(commanderMock);
-    setTimeout(() => {
-      expect(consoleStub).to.have.been.calledWithMatch(/27.2 K/);
-      done();
-    }, 300);
+
+    await wait(300);
+
+    expect(consoleStub).to.have.been.calledWithMatch(/27.2 K/);
   });
 });
