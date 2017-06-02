@@ -1,5 +1,5 @@
-const request = require('request');
-const chalk = require('chalk');
+// const request = require('request');
+// const chalk = require('chalk');
 const ora = require('ora');
 
 const spinner = ora({
@@ -7,13 +7,6 @@ const spinner = ora({
   color: 'yellow',
 });
 
-function optDate() {
-    setTimeout(function() {
-        spinner.stop();
-    }, 2000);
-}
-
-module.exports = optDate;
 /*
 -u = Unity (d, m, y) (default: d)
 -v = Value (Int)
@@ -27,3 +20,11 @@ getme date -u --subtract -v 3 // Subtract 3 days from today
 getme date -u d -v 7 -d 2017-05-10 --add // Add 7 days to specified date
 
 */
+
+function optDate() {
+  setTimeout(() => {
+    spinner.stop();
+  }, 2000);
+}
+
+module.exports = optDate;
