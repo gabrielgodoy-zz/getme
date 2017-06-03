@@ -1,13 +1,26 @@
-const chalk = require('chalk');
-const request = require('request');
+import chalk from 'chalk';
+import axios from 'axios';
 
-const apiPrefix = 'http://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en';
+const apiURL = 'http://api.forismatic.com/api/1.0/';
+const config = { params: { method: 'getQuote', format: 'json', lang: 'en' } };
 
-function optQuote() {
-  request.get(apiPrefix, (error, response, body) => {
-    const parsedResponse = JSON.parse(body);
-    console.log(`"${parsedResponse.quoteText.trim()}", ${chalk.yellow(parsedResponse.quoteAuthor)}`);
-  });
+async function optQuote() {
+  try {
+    const response = await axios.get(apiURL, config);
+    const { data, status: statusCode } = response;
+
+    if (statusCode !== 200 || typeof data !== 'object') {
+      console.log(chalk.red('It was not possible to retrieve what you want'));
+      return false;
+    }
+
+    console.log(`"${data.quoteText.trim()}", ${chalk.yellow(data.quoteAuthor)}`);
+  } catch (err) {
+    console.log(chalk.red('Something went wrong in the API. Try in a few minutes'));
+    return err;
+  }
+
+  return false;
 }
 
-module.exports = optQuote;
+export default optQuote;
