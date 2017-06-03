@@ -1,6 +1,6 @@
-const chalk = require('chalk');
-const ora = require('ora');
-const request = require('request');
+import chalk from 'chalk';
+import ora from 'ora';
+import axios from 'axios';
 
 const key = 'trnsl.1.1.20170105T060308Z.f3f9bcb6f1acfc21.b8b98c7a8899c9532a26b8c0a665696bd9b6aa83';
 const languageCode = 'pt';
@@ -11,52 +11,65 @@ const spinner = ora({
 });
 
 function formatFromtoCombinations(combinations) {
-  const formattedGroupsOfTen = [];
-  let dirsGroup = [];
-  combinations.forEach((fromto, index, array) => {
-    const isDivisibleByTen = index % 10 === 0;
-    const groupsOfTenInArray = Math.ceil(array.length / 10);
+  const lines = [];
 
-    if (isDivisibleByTen && groupsOfTenInArray > formattedGroupsOfTen.length) {
-      formattedGroupsOfTen.push(dirsGroup.join(' | '));
-      dirsGroup = [];
-    }
-    dirsGroup.push(fromto);
+  for (let i = 0, n = combinations.length; i < n; i += 10) {
+    lines.push(combinations.slice(i, i + 10).join(' | '));
+  }
 
-    const isFinalItemInArray = index === (array.length - 1);
-    const groupsOfTenFinished = groupsOfTenInArray === formattedGroupsOfTen.length;
-    if (groupsOfTenFinished && isFinalItemInArray) {
-      formattedGroupsOfTen.push(dirsGroup.join(' | '));
-    }
-  });
-  return formattedGroupsOfTen.join('\n');
+  return lines.join('\n');
 }
 
-function optTranslate(textToTranslateArray, options) {
+async function optTranslate(textToTranslateArray, options) {
   if (options.list) {
-    const listLangsPrefix = 'https://translate.yandex.net/api/v1.5/tr.json/getLangs';
-    const listSupportedLangs = `${listLangsPrefix}?key=${key}&ui=${languageCode}`;
-    request.get(listSupportedLangs, (error, response, body) => {
-      const parsedResponse = JSON.parse(body);
+    const url = 'https://translate.yandex.net/api/v1.5/tr.json/getLangs';
+    const params = { key, ui: languageCode };
+
+    try {
+      const { data, status: statusCode } = await axios.get(url, { params });
+
+      if (statusCode !== 200 || typeof data !== 'object') {
+        console.log(chalk.red('It was not possible to retrieve what you want'));
+        return false;
+      }
+
       console.log(`\n${chalk.yellow('--fromto')} options`);
-      console.log(formatFromtoCombinations(parsedResponse.dirs));
-    });
+      console.log(formatFromtoCombinations(data.dirs));
+    } catch (err) {
+      console.log(chalk.red('Something went wrong in the API. Try in a few minutes'));
+      return err;
+    }
   } else if (options.fromto && options.text) {
     spinner.start();
-    const translatePrefix = 'https://translate.yandex.net/api/v1.5/tr.json/translate';
+
+    const url = 'https://translate.yandex.net/api/v1.5/tr.json/translate';
     const fromto = options.fromto;
-    const text = `${options.text}${textToTranslateArray.length ? `+${textToTranslateArray.join('+')}` : ''}`;
-    const apiTranslate = `${translatePrefix}?key=${key}&text=${text}&lang=${fromto}&options=1`;
-    request.get(apiTranslate, (error, response, body) => {
+    const text = `${options.text}+${(textToTranslateArray.length ? textToTranslateArray.join('+') : '')}`;
+    const params = { key, text, lang: fromto, options: 1 };
+
+    try {
+      const { data, status: statusCode } = await axios.get(url, { params });
+
       spinner.stop();
-      const parsedResponse = JSON.parse(body);
+
+      if (statusCode !== 200 || typeof data !== 'object') {
+        console.log(chalk.red('It was not possible to retrieve what you want'));
+        return false;
+      }
+
       console.log(text.replace(/\+/g, ' '));
-      console.log(chalk.blue(parsedResponse.text[0]));
-    });
+      console.log(chalk.blue(data.text[0]));
+    } catch (err) {
+      spinner.stop();
+      console.log(chalk.red('Something went wrong in the API. Try in a few minutes'));
+      return err;
+    }
   } else {
     console.log(`\nIn order to translate a text you need to pass ${chalk.yellow('--fromto')} and ${chalk.yellow('--text')} arguments`);
     console.log(`Example: ${chalk.blue('getme translation --fromto en-es --text The book is on the table')}`);
   }
+
+  return true;
 }
 
-module.exports = optTranslate;
+export default optTranslate;
