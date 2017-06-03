@@ -1,7 +1,6 @@
 #! /usr/bin/env node
 import commander from 'commander';
 import chalk from 'chalk';
-import { currVersion } from '../package.json';
 import optSearch from './options/optSearch';
 import optWeather from './options/optWeather';
 import optIP from './options/optIP';
@@ -14,6 +13,8 @@ import optQuote from './options/optQuote';
 import optChuckNorris from './options/optChuckNorris';
 import optGit from './options/optGit';
 import optTwitter from './options/optTwitter';
+
+const currVersion = require('../package.json').version;
 
 commander
   .version(currVersion)
