@@ -19,6 +19,7 @@ function getLocalIP() {
       }
     });
   });
+
   return addresses;
 }
 
@@ -30,7 +31,7 @@ async function optIP() {
     const { data, status: statusCode } = response;
     spinner.stop();
 
-    if (statusCode !== 200) {
+    if (statusCode !== 200 || typeof data !== 'object') {
       return console.log('It was not possible to retrieve your IP this time');
     }
 
