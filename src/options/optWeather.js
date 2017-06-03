@@ -1,7 +1,7 @@
-const request = require('request');
-const chalk = require('chalk');
-const ora = require('ora');
-const emoji = require('node-emoji');
+import axios from 'axios';
+import chalk from 'chalk';
+import ora from 'ora';
+import emoji from 'node-emoji';
 
 let spinner;
 const openWeatherPrefix = 'http://api.openweathermap.org/data/2.5/';
@@ -81,50 +81,86 @@ function logForecast(address, weatherObject, weatherUnit) {
     });
 }
 
-function getWeather(address, command) {
+async function getWeather(address, command) {
   const searchType = command.name() === 'weather' ? 'weather' : 'forecast';
-  const latAndLon = `lat=${address.lat}&lon=${address.lon}`;
-  const units = `units=${weatherUnitAPI(command)}`;
-  const APICall = `${openWeatherPrefix}${searchType}?${latAndLon}&${units}&APPID=${key}`;
+  const config = {
+    params: {
+      lat: address.lat,
+      lon: address.lon,
+      units: weatherUnitAPI(command),
+      APPID: key,
+    },
+  };
   const formattedWeatherUnit = weatherUnitAPI(command, true);
 
-  request(APICall, (error, response, body) => {
+  try {
+    const response = await axios.get(`${openWeatherPrefix}${searchType}`, config);
+    const { data, status: statusCode } = response;
     spinner.stop();
-    if (!error && response.statusCode === 200) {
-      const weatherObject = JSON.parse(body);
 
-      console.log();
-      if (command.name() === 'weather') {
-        const date = new Date(weatherObject.dt * 1000);
-        logWeather(address, date, weatherObject, formattedWeatherUnit);
-      } else {
-        logForecast(address, weatherObject, formattedWeatherUnit);
-      }
+    if (statusCode !== 200 || typeof data !== 'object') {
+      console.log(chalk.red('It was not possible to retrieve what you want'));
+      return false;
     }
-  });
+    console.log();
+
+    let weather;
+
+    if (command.name() === 'weather') {
+      const date = new Date(data.dt * 1000);
+      weather = logWeather(address, date, data, formattedWeatherUnit);
+    } else {
+      weather = logForecast(address, data, formattedWeatherUnit);
+    }
+
+    return weather;
+  } catch (err) {
+    console.error(err, 'getWeather');
+    console.log(chalk.red('Something went wrong in the API. Try in a few minutes'));
+    return err;
+  }
 }
 
-function getAddress(ip, command) {
-  request(`http://ip-api.com/json/${ip}`, (error, response, body) => {
-    if (!error && response.statusCode === 200) {
-      const address = JSON.parse(body);
-      getWeather(address, command);
+async function getAddress(ip, command) {
+  try {
+    const response = await axios.get(`http://ip-api.com/json/${ip}`);
+    const { data, status: statusCode } = response;
+
+    if (statusCode !== 200 || typeof data !== 'object') {
+      console.log(chalk.red('It was not possible to retrieve what you want'));
+      return false;
     }
-  });
+
+    return getWeather(data, command);
+  } catch (err) {
+    console.error(err, 'getAdress');
+    console.log(chalk.red('Something went wrong in the API. Try in a few minutes'));
+    return err;
+  }
 }
 
-function optWeather(command) {
+async function optWeather(command) {
   const loadingType = command.name() === 'weather' ? 'weather' : 'forecast';
   spinner = ora({
     text: `Loading ${loadingType}`,
     color: 'yellow',
   }).start();
-  request('https://api.ipify.org?format=json', (error, response, body) => {
-    if (!error && response.statusCode === 200) {
-      const ip = JSON.parse(body).ip;
-      getAddress(ip, command);
+
+  try {
+    const response = await axios.get('https://api.ipify.org', { params: { format: 'json' } });
+    const { data, status: statusCode } = response;
+
+    if (statusCode !== 200 || typeof data !== 'object') {
+      console.log(chalk.red('It was not possible to retrieve what you want'));
+      return false;
     }
-  });
+
+    return getAddress(data.ip, command);
+  } catch (err) {
+    console.error(err);
+    console.log(chalk.red('Something went wrong in the API. Try in a few minutes'));
+    return err;
+  }
 }
 
 module.exports = optWeather;
