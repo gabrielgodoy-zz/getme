@@ -15,7 +15,7 @@
     "watch": "npm-watch",
     "test": "mocha --compilers js:babel-register --colors --reporter spec ./src/**/*.test.js",
     "test:watch": "npm test -- --watch",
-    "coverage": "nyc --report lcov --report text _mocha --compilers js:babel-register ./src/**/*.js",
+    "coverage": "nyc --reporter=lcov --reporter=text _mocha --compilers js:babel-register ./src/**/*.js",
     "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint './src/**/*.js'",
     "precommit": "npm run lint && npm test",
