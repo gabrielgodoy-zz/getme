@@ -50,14 +50,14 @@ function formatRates(rates) {
 
 async function optCurrency({ base = 'USD', symbols } = {}) {
   const apiURL = 'http://api.fixer.io/latest';
-  const params = { params: { base } };
+  const config = { params: { base } };
 
   if (symbols) {
-    params.params.symbols = symbols;
+    config.params.symbols = symbols;
   }
 
   try {
-    const response = await axios.get(apiURL, params);
+    const response = await axios.get(apiURL, config);
     const { data, status: statusCode } = response;
 
     if (statusCode !== 200 || typeof data !== 'object') {

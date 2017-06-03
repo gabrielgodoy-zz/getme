@@ -1,4 +1,4 @@
-exports.response = JSON.stringify({
+export const response = {
   base: 'USD',
   date: '2017-01-04',
   rates: {
@@ -33,5 +33,5 @@ exports.response = JSON.stringify({
     TRY: 3.5822,
     ZAR: 13.645,
     EUR: 0.95813,
-  },
-});
+  }
+};
