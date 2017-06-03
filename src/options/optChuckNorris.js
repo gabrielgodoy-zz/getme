@@ -1,34 +1,32 @@
-const request = require('request');
-const chalk = require('chalk');
-const ora = require('ora');
+import axios from 'axios';
+import chalk from 'chalk';
+import ora from 'ora';
 
 const spinner = ora({
   text: 'Waiting Chuck Norris, you have no option.',
   color: 'yellow',
 });
 
-function optChuck() {
+export default async function optChuck() {
   spinner.start();
 
-  request('https://api.chucknorris.io/jokes/random', (error, response, body) => {
-    let apiResponse;
+  try {
+    const response = await axios.get('https://api.chucknorris.io/jokes/random');
+    const { data, status: statusCode } = response;
 
-    try {
-      spinner.stop();
-      apiResponse = JSON.parse(body);
-    } catch (parseError) {
-      spinner.stop();
-      console.log('Chuck is busy now, try again later.');
-      return false;
-    }
-
-    if ('error' in apiResponse) {
+    if (statusCode !== 200 || typeof data !== 'object') {
       console.log(chalk.red('It was not possible to retrieve what you want'));
       return false;
     }
 
-    return console.log(`Chuck says: ${chalk.red(JSON.parse(body).value)}`);
-  });
+    spinner.stop();
+
+    return console.log(`Chuck says: ${chalk.red(data.value)}`);
+  } catch (err) {
+    spinner.stop();
+
+    console.log('Chuck is busy now, try again later.');
+    return err;
+  }
 }
 
-module.exports = optChuck;
