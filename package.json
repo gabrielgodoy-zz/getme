@@ -16,7 +16,7 @@
     "test": "mocha --compilers js:babel-register --colors --reporter spec ./src/**/*.test.js",
     "test:watch": "npm test -- --watch",
     "coverage": "nyc --report lcov --report text _mocha --compilers js:babel-register ./src/**/*.js",
-    "coveralls": "nyc report --reporter text-lcov | coveralls",
+    "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint './src/**/*.js'",
     "precommit": "npm run lint && npm test",
     "prepush": "npm run lint"
@@ -90,6 +90,7 @@
     "eslint-config-airbnb-base": "^11.0.0",
     "eslint-plugin-import": "^2.2.0",
     "husky": "^0.13.3",
+    "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
     "mocha-lcov-reporter": "^1.2.0",
     "moxios": "^0.3.0",
