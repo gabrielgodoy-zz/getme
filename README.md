@@ -22,7 +22,7 @@ Install it globally
 | command                               | definition                                                                                  |
 | --------------------------------------| :-------------------------------------------------------------------------------------------|
 |`getme -h, --help`                     | Output usage information                                                                    |
-|`getme t, search [query]`              | Search on twitter                    |
+|`getme tw, search [query]`              | Search on twitter                    |
 |`getme s, search [query]`              | Search in Google                                                                            |
 |`getme w, weather [unit]`              | Get weather, default unit is Celsius, can be **celsius, fahrenheit, or kelvin**             |
 |`getme f, forecast [unit]`             | Get weather forecast of 5 days ahead, default unit is Celsius                               |
@@ -139,7 +139,7 @@ Expiration can be in
 ## Search on Twitter
 
 - `getme tweets #node #npm`
-- `getme t node npm`
+- `getme tw node npm`
 
 You can search by using @ or #.
 
