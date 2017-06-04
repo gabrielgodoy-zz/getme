@@ -44,7 +44,8 @@ async function optTranslate(textToTranslateArray, options) {
 
     const url = 'https://translate.yandex.net/api/v1.5/tr.json/translate';
     const fromto = options.fromto;
-    const text = `${options.text}+${(textToTranslateArray.length ? textToTranslateArray.join('+') : '')}`;
+    const texts = textToTranslateArray.length ? `+${textToTranslateArray.join('+')}` : '';
+    const text = `${options.text}${texts}`;
     const params = { key, text, lang: fromto, options: 1 };
 
     try {
