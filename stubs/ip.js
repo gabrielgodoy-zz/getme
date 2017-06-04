@@ -1,0 +1,45 @@
+export const networkInterfaces = {
+  lo0: [{
+    address: '127.0.0.1',
+    netmask: '255.0.0.0',
+    family: 'IPv4',
+    mac: '00:00:00:00:00:00',
+    internal: true,
+  }, {
+    address: '::1',
+    netmask: 'ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff',
+    family: 'IPv6',
+    mac: '00:00:00:00:00:00',
+    scopeid: 0,
+    internal: true,
+  }, {
+    address: 'fe80::1',
+    netmask: 'ffff:ffff:ffff:ffff::',
+    family: 'IPv6',
+    mac: '00:00:00:00:00:00',
+    scopeid: 1,
+    internal: true,
+  }],
+  en0: [{
+    address: 'fe80::10db:a989:c30d:629',
+    netmask: 'ffff:ffff:ffff:ffff::',
+    family: 'IPv6',
+    mac: '3c:15:c2:d1:8e:3e',
+    scopeid: 4,
+    internal: false,
+  }, {
+    address: '192.168.0.21',
+    netmask: '255.255.255.0',
+    family: 'IPv4',
+    mac: '3c:15:c2:d1:8e:3e',
+    internal: false,
+  }],
+  awdl0: [{
+    address: 'fe80::409a:b7ff:fe03:69d2',
+    netmask: 'ffff:ffff:ffff:ffff::',
+    family: 'IPv6',
+    mac: '42:9a:b7:03:69:d2',
+    scopeid: 8,
+    internal: false,
+  },],
+};

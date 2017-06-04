@@ -1,102 +1,84 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-underscore-dangle */
 
-const nock = require('nock');
-const chalk = require('chalk');
-const chai = require('chai');
-const rewire = require('rewire');
-const sinonChai = require('sinon-chai');
-const sinon = require('sinon');
+import moxios from 'moxios';
+import chalk from 'chalk';
+import chai, { expect } from 'chai';
+import rewire from 'rewire';
+import sinonChai from 'sinon-chai';
+import sinon from 'sinon';
+
+import { response } from '../../stubs/currency';
 
 const optCurrency = rewire('./optCurrency');
-const expect = chai.expect;
 chai.use(sinonChai);
 
-const stubs = require('../../stubs/currency');
-
-let responseMock;
 let commanderMock;
 let consoleStub;
 
 describe('optCurrency', () => {
   beforeEach(() => {
-    responseMock = stubs.response;
+    moxios.install();
     consoleStub = sinon.stub(console, 'log');
   });
 
   afterEach(() => {
+    moxios.uninstall();
     console.log.restore();
   });
 
-  it('should console log USD base currency against all currencies', (done) => {
-    nock('http://api.fixer.io')
-      .get('/latest')
-      .query({ base: 'USD' })
-      .reply(200, responseMock);
+  it('should console log USD base currency against all currencies', async () => {
+    moxios.stubRequest('http://api.fixer.io/latest?base=USD', { status: 200, response });
 
     commanderMock = {};
     optCurrency(commanderMock);
-    const responseMockParsed = JSON.parse(responseMock);
 
-    setTimeout(() => {
-      expect(consoleStub).to.have.been.calledWith(`\n${chalk.yellow('Base currency')} ${optCurrency.__get__('getCountryIcon')(responseMockParsed.base)}  ${chalk.cyan(responseMockParsed.base)}`);
-      expect(consoleStub).to.have.been.calledWith(`\nCurrency Rates\n\n${optCurrency.__get__('formatRates')(responseMockParsed.rates)}`);
-      done();
-    }, 300);
+    await new Promise(resolve => moxios.wait(resolve));
+
+    expect(consoleStub).to.have.been.calledWith(`\n${chalk.yellow('Base currency')} ${optCurrency.__get__('getCountryIcon')(response.base)}  ${chalk.cyan(response.base)}`);
+    expect(consoleStub).to.have.been.calledWith(`\nCurrency Rates\n\n${optCurrency.__get__('formatRates')(response.rates)}`);
   });
 
-  it('should console log USD base currency against currencies defined in symbols parameter', (done) => {
-    const responseMockSymbols = JSON.stringify({
+  it('should console log USD base currency against currencies defined in symbols parameter', async () => {
+    const response2 = {
       base: 'USD',
       date: '2017-01-04',
       rates: {
         BRL: 3.2369,
         EUR: 0.95813,
       },
-    });
+    };
 
-    const responseMockParsed = JSON.parse(responseMockSymbols);
-
-    nock('http://api.fixer.io')
-      .get('/latest')
-      .query({ base: 'USD', symbols: 'BRL,EUR' })
-      .reply(200, responseMockSymbols);
+    moxios.stubRequest('http://api.fixer.io/latest?base=USD&symbols=BRL,EUR', { status: 200, response: response2 });
 
     commanderMock = { symbols: 'BRL,EUR' };
     optCurrency(commanderMock);
 
-    setTimeout(() => {
-      expect(consoleStub).to.have.been.calledWith(`\n${chalk.yellow('Base currency')} ${optCurrency.__get__('getCountryIcon')(responseMockParsed.base)}  ${chalk.cyan(responseMockParsed.base)}`);
-      expect(consoleStub).to.have.been.calledWith(`\nCurrency Rates\n\n${optCurrency.__get__('formatRates')(responseMockParsed.rates)}`);
-      done();
-    }, 300);
+    await new Promise(resolve => moxios.wait(resolve));
+
+    expect(consoleStub).to.have.been.calledWith(`\n${chalk.yellow('Base currency')} ${optCurrency.__get__('getCountryIcon')(response2.base)}  ${chalk.cyan(response2.base)}`);
+    expect(consoleStub).to.have.been.calledWith(`\nCurrency Rates\n\n${optCurrency.__get__('formatRates')(response2.rates)}`);
   });
 
-  it('should message user when api reply with error', (done) => {
-    nock('http://api.fixer.io')
-      .get('/latest')
-      .query({ base: 'USD' })
-      .replyWithError('Error');
+  it('should message user when api reply with error', async () => {
+    moxios.stubRequest('http://api.fixer.io/latest?base=USD', { status: 500 });
 
     commanderMock = {};
     optCurrency(commanderMock);
-    setTimeout(() => {
-      expect(consoleStub).to.have.been.calledWith(`${chalk.red('Something went wrong in the API. Try in a few minutes')}`);
-      done();
-    }, 300);
+
+    await new Promise(resolve => moxios.wait(resolve));
+
+    expect(consoleStub).to.have.been.calledWith(`${chalk.red('Something went wrong in the API. Try in a few minutes')}`);
   });
 
-  it('should message user when request is made with unusual get parameters', (done) => {
-    nock('http://api.fixer.io')
-      .get('/latest')
-      .query({ base: 'UWERSD' })
-      .reply(200, JSON.stringify({ error: 'Some error' }));
+  it('should message user when request is made with unusual get parameters', async () => {
+    moxios.stubRequest('http://api.fixer.io/latest?base=UWERSD', { status: 200, response: 'invalid_json' });
 
     commanderMock = { base: 'UWERSD' };
     optCurrency(commanderMock);
-    setTimeout(() => {
-      expect(consoleStub).to.have.been.calledWith(`${chalk.red('It was not possible to retrieve what you want')}`);
-      done();
-    }, 300);
+
+    await new Promise(resolve => moxios.wait(resolve));
+
+    expect(consoleStub).to.have.been.calledWith(`${chalk.red('It was not possible to retrieve what you want')}`);
   });
 });

@@ -1,14 +1,15 @@
 /* eslint-disable no-unused-expressions */
 
-const chalk = require('chalk');
-const chai = require('chai');
-const sinonChai = require('sinon-chai');
-const sinon = require('sinon');
-const childProcess = require('child_process');
-const optSearch = require('./optSearch');
+import chalk from 'chalk';
+import chai, { expect } from 'chai';
+import sinonChai from 'sinon-chai';
+import sinon from 'sinon';
+import childProcess from 'child_process';
+import optSearch from './optSearch';
 
-const expect = chai.expect;
 chai.use(sinonChai);
+
+const wait = t => new Promise(r => setTimeout(r, t));
 
 let queryMock;
 let childProcessStub;
@@ -28,33 +29,33 @@ describe('optSearch', () => {
     console.log.restore();
   });
 
-  it('Should call child_process.exec with correct search URL', (done) => {
+  it('Should call child_process.exec with correct search URL', async () => {
     const queryGoogle = 'https://www.google.com/search?q=';
     // mock process for proper open command call
     Object.defineProperty(process, 'platform', { value: 'unix' });
     optSearch(queryMock);
-    setTimeout(() => {
-      expect(childProcessStub).to.have.been.calledWith(`open ${queryGoogle}${queryMock.join('+')}`);
-      done();
-    }, 300);
+
+    await wait(300);
+
+    expect(childProcessStub).to.have.been.calledWith(`open ${queryGoogle}${queryMock.join('+')}`);
   });
 
-  it('Should call child_process.exec with correct search URL and win32 open command', (done) => {
+  it('Should call child_process.exec with correct search URL and win32 open command', async () => {
     const queryGoogle = 'https://www.google.com/search?q=';
     // mock process for proper open command call
     Object.defineProperty(process, 'platform', { value: 'win32' });
     optSearch(queryMock);
-    setTimeout(() => {
-      expect(childProcessStub).to.have.been.calledWith(`start ${queryGoogle}${queryMock.join('+')}`);
-      done();
-    }, 300);
+
+    await wait(300);
+
+    expect(childProcessStub).to.have.been.calledWith(`start ${queryGoogle}${queryMock.join('+')}`);
   });
 
-  it('Should log Searching message to user', (done) => {
+  it('Should log Searching message to user', async () => {
     optSearch(queryMock);
-    setTimeout(() => {
-      expect(consoleLogStub).to.have.been.calledWith(chalk.blue('Searching for "arg1 arg2" on Google'));
-      done();
-    }, 300);
+
+    await wait(300);
+
+    expect(consoleLogStub).to.have.been.calledWith(chalk.blue('Searching for "arg1 arg2" on Google'));
   });
 });

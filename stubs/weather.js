@@ -1,4 +1,4 @@
-exports.forecastResponseMock = JSON.stringify({
+export const forecastResponseMock = {
   city: {
     id: 3473648,
     name: 'Icaraí',
@@ -48,9 +48,9 @@ exports.forecastResponseMock = JSON.stringify({
       dt_txt: '2017-01-05 09:00:00',
     },
   ]
-});
+};
 
-const weatherResponseMock = JSON.stringify({
+export const weatherResponseMock = {
   weather: [
     {
       id: 211,
@@ -67,11 +67,9 @@ const weatherResponseMock = JSON.stringify({
     temp_max: 33,
   },
   dt: 1483567200,
-});
+};
 
-exports.weatherResponseMock = weatherResponseMock;
-
-exports.getIconMocks = function getIconMocks () {
+export function getIconMocks () {
   ['02d','03d','04d','09d','10d','11d','13d','50d','01n','02n','03n','04n','09n','10n','11n','13n','50n']
     .map(icon => {
       const res = Object.assign({}, weatherResponseMock)

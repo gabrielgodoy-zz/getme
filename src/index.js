@@ -1,19 +1,20 @@
 #! /usr/bin/env node
-const commander = require('commander');
-const chalk = require('chalk');
+import commander from 'commander';
+import chalk from 'chalk';
+import optSearch from './options/optSearch';
+import optWeather from './options/optWeather';
+import optIP from './options/optIP';
+import optSpeed from './options/optSpeed';
+import optCurrency from './options/optCurrency';
+import optDefinition from './options/optDefinition';
+import optTranslate from './options/optTranslate';
+import optUpload from './options/optUpload';
+import optQuote from './options/optQuote';
+import optChuckNorris from './options/optChuckNorris';
+import optGit from './options/optGit';
+import optTwitter from './options/optTwitter';
+
 const currVersion = require('../package.json').version;
-const optSearch = require('./options/optSearch');
-const optWeather = require('./options/optWeather');
-const optIP = require('./options/optIP');
-const optSpeed = require('./options/optSpeed');
-const optCurrency = require('./options/optCurrency');
-const optDefinition = require('./options/optDefinition');
-const optTranslate = require('./options/optTranslate');
-const optUpload = require('./options/optUpload');
-const optQuote = require('./options/optQuote');
-const optChuckNorris = require('./options/optChuckNorris');
-const optGit = require('./options/optGit');
-const optTwitter = require('./options/optTwitter');
 
 commander
   .version(currVersion)
