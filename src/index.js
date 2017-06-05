@@ -12,6 +12,7 @@ const optTranslate = require('./options/optTranslate');
 const optUpload = require('./options/optUpload');
 const optQuote = require('./options/optQuote');
 const optChuckNorris = require('./options/optChuckNorris');
+const optGit = require('./options/optGit');
 const optTwitter = require('./options/optTwitter');
 const optDate = require('./options/optDate');
 
@@ -108,6 +109,11 @@ commander
   .option('-a, --add', 'Inform to add value to date (Default Option)', true)
   .option('-s, --subtract', 'Inform to subtract value from date', false)
   .action((value, command) => optDate(value, command));
+
+commander
+  .command('git')
+  .description('Notifications from GitHub')
+  .action(command => optGit(command));
 
 commander.on('*', (command) => {
   console.log(`The command "${chalk.red(command)}" does not exist`);
