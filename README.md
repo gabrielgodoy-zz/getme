@@ -153,6 +153,28 @@ File is anonymous and is erased after link expires also, and cannot be retrieved
 
 Read more in [file.io](https://www.file.io/)
 
+## Calculate Dates
+
+Usage: 
+```getme date|dt [value]```
+
+- value - Integer value of period to add/subtract
+- --period, -p - Specify the period of time ([See momentJS Keys](https://momentjs.com/docs/#/manipulating/add/))
+- --date, -d - Specify the base date to manipulate (Default: Today)
+- --add, -a - Set the current action to add to date (This is the default option)
+- --subtract, -s - Set the current action to subtract to date (Not compatible with add parameter)
+
+### Examples
+Add 5 days to current date
+`getme date 5`
+
+Add 10 days to specific date
+`getme dt 10 -d 2017-05-01`
+
+Subtract 2 months
+`getme dt 2 --period M -d 2017-05-01`
+
+
 
 ## Contributing
 
