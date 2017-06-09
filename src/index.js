@@ -14,6 +14,7 @@ const optQuote = require('./options/optQuote');
 const optChuckNorris = require('./options/optChuckNorris');
 const optGit = require('./options/optGit');
 const optTwitter = require('./options/optTwitter');
+const optDate = require('./options/optDate');
 
 commander
   .version(currVersion)
@@ -97,6 +98,17 @@ commander
   .command('chuck')
   .description('Get Chuck Norris facts')
   .action(command => optChuckNorris(command));
+
+commander
+  .command('date <value>')
+  .description('Add or subtract date')
+  .alias('dt')
+  .option('-d, --date <startDate>', 'Sets the start date (Default: Current Date)')
+  .option('-p, --period <period>', 'Sets the period. Day(d), Month(M), Year(y), Week(w) (Default: d)', 'd')
+  // .option('-v, --value <value>', 'Sets the value for period')
+  .option('-a, --add', 'Inform to add value to date (Default Option)', true)
+  .option('-s, --subtract', 'Inform to subtract value from date', false)
+  .action((value, command) => optDate(value, command));
 
 commander
   .command('git')

@@ -57,6 +57,7 @@
     "co": "^4.6.0",
     "co-prompt": "^1.0.0",
     "commander": "^2.9.0",
+    "moment": "^2.18.1",
     "inquirer": "^3.0.6",
     "node-emoji": "^1.4.3",
     "oauth": "^0.9.15",
