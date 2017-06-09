@@ -19,34 +19,40 @@ Install it globally
 
 ### Getme Options
 
-| command                               | definition                                                                                  |
-| --------------------------------------| :-------------------------------------------------------------------------------------------|
-|`getme -h, --help`                     | Output usage information                                                                    |
-|`getme tw, search [query]`              | Search on twitter                    |
-|`getme s, search [query]`              | Search in Google                                                                            |
-|`getme w, weather [unit]`              | Get weather, default unit is Celsius, can be **celsius, fahrenheit, or kelvin**             |
-|`getme f, forecast [unit]`             | Get weather forecast of 5 days ahead, default unit is Celsius                               |
-|`getme cur, currency [base] [currs]`   | Get currency rates against a base currency (default base USD, default currencies All)       |
-|`getme ip`                             | Get public and network IP addresses                                                         |
-|`getme speed`                          | Get internet speed based on [speedtest](http://www.speedtest.net/)                          |
-|`getme d, definition [word]`           | Get word definitions (Only works for english words)                                         |
-|`getme d, definition -s [word]`        | Get synonyms of a specific word (Only works for english words)                              |
-|`getme t, translation [options]`       | Get translations of text from a language to another                                         |
-|`getme q, quote`                       | Displays an inspirational quote and its author                                              |
-|`getme u, upload [filepath][options]`  | Uploads a file to file.io and generates a link for you to share that file                   |
-|`getme chuck`                          | Displays a random Chuck Norris joke                                                         |
-|`getme git`                            | Get new notifications from GitHub |
+| command                                           | definition                                                                                  |
+|----------------------------------------------| :--------------------------------------------------------------------------------|
+|`getme -h, --help` or `getme [COMMAND] -h, --help` | Output usage information                                                                    |
+|`getme chuck`                                      | Displays a random Chuck Norris joke                                                         |
+|`getme cur, currency [base] [currs]`               | Get currency rates against a base currency (default base USD, default currencies All)       |
+|`getme d, definition [word]`                       | Get word definitions (Only works for english words)                                         |
+|`getme d, definition -s [word]`                    | Get synonyms of a specific word (Only works for english words)                              |
+|`getme dt, date [options] [value]`                 | Get x days from now, and the corresponding day of the week                                  |
+|`getme f, forecast [unit]`                         | Get weather forecast of 5 days ahead, default unit is Celsius                               |
+|`getme git`                                        | Get new notifications from GitHub                                                           |
+|`getme ip`                                         | Get public and network IP addresses                                                         |
+|`getme q, quote`                                   | Displays an inspirational quote and its author                                              |
+|`getme s, search [query]`                          | Search in Google                                                                            |
+|`getme speed`                                      | Get internet speed based on [speedtest](http://www.speedtest.net/)                     |
+|`getme t, translation [options]`                   | Get translations of text from a language to another                                         |
+|`getme tw, search [query]`                         | Search on twitter                                                                           |
+|`getme u, upload [filepath][options]`              | Uploads a file to file.io and generates a link for you to share that file                   |
+|`getme w, weather [unit]`                          | Get weather, default unit is Celsius, can be **celsius, fahrenheit, or kelvin**         |
 
 
-## Search on Google
+
+## Google search
 `getme search dogs and cats` Opens browser, searching for "dogs and cats"
 
 ![getme-search](./gifs/getme-search.gif)
 
-## Get GitHub Notifications
+
+
+## GitHub notifications
 `getme git` Option to open selected notification in browser also.
 
-## Get Weather
+
+
+## Weather and forecast
 `getme weather` Weather in celsius
 
 `getme weather -f` Weather in fahrenheit
@@ -57,7 +63,9 @@ Install it globally
 
 ![getme-weather](./gifs/getme-weather.gif)
 
-## Get Currency
+
+
+## Currency rates
 `getme currency -s JPY,BRL,CAD` Get JPY, BRL and CAD currencies where base currency is USD (USD is default if no base currency is set)
 
 `getme currency -b EUR -s USD,BRL` Get USD and BRL currency where base currency is EUR
@@ -73,26 +81,33 @@ For entire list of possible currency initials:
 [European Central Bank](http://www.ecb.europa.eu/stats/exchange/eurofxref/html/index.en.html)
 
 
-## Get you public and network IP addresses
+## Public and network IP addresses
 `getme ip`
 
 ![getme-ip](./gifs/getme-ip.gif)
 
-## Get your internet download/upload speed, and your ping
+
+
+## Internet download/upload speed, and your ping
 `getme speed`
 
 ![getme-speed](./gifs/getme-speed.gif)
 
-## Get word definitions (Only works for english words)
+
+
+## Word definitions (Only works for english words)
 `getme definition chair` Get definitions for the word chair
 
 ![getme-definition](./gifs/getme-definition.gif)
 
-## Get word synonyms
+
+
+## Word synonyms
 `getme definition -s teacher` Get synonyms for the word teacher
 
 
-## Get text translations
+
+## Text translations
 `getme translation --fromto en-pt --text The book is on the table` Translate from English to Portuguese "the book is on the table" becomes "O livro está sobre a mesa"
 
 `getme translation --fromto es-en --text El libro está sobre la mesa` Translate from Spanish to English "El libro está sobre la mesa" becomes "The book is on the table"
@@ -108,7 +123,9 @@ To get a list of all the possible --fromto combinations, type
 
 ![getme-translation](./gifs/getme-translation.gif)
 
-## Get inspirational quotes
+
+
+## Inspirational quotes
 `getme quote`
 `getme q`
 
@@ -136,7 +153,9 @@ Expiration can be in
 
 ![getme-upload](./gifs/getme-upload.gif)
 
-## Search on Twitter
+
+
+## Twitter search
 
 - `getme tweets #node #npm`
 - `getme tw node npm`
@@ -153,9 +172,11 @@ File is anonymous and is erased after link expires also, and cannot be retrieved
 
 Read more in [file.io](https://www.file.io/)
 
-## Calculate Dates
 
-Usage: 
+
+## Dates calculation
+
+Usage:
 ```getme date|dt [value]```
 
 - value - Integer value of period to add/subtract
@@ -175,6 +196,9 @@ Subtract 2 months
 `getme dt 2 --period M -d 2017-05-01`
 
 
+And much more 🚀
+
+---
 
 ## Contributing
 
