@@ -5,16 +5,23 @@ import open from 'open';
 
 require('babel-polyfill');
 
-const config = ini.parse(fs.readFileSync('.git/config', 'utf-8'));
-
 function openRepo() {
-  if (!config) {
-    console.log(chalk.red('No Git repo found'));
-    return;
-  }
-  const url = config['remote "origin"'].url;
+  try {
+    const config = ini.parse(fs.readFileSync('.git/config', 'utf-8'));
+    const url = config['remote "origin"'].url;
+    const isSSHRemoteUrl = url.indexOf('git@') > -1;
+    let finalUrl;
 
-  open(url);
+    if (isSSHRemoteUrl) {
+      finalUrl = `http://${url.replace('git@', '').replace(':', '/').replace('.git', '')}`;
+    } else {
+      finalUrl = url;
+    }
+
+    open(finalUrl);
+  } catch (err) {
+    console.log(chalk.red('No Git repo found'));
+  }
 }
 
 module.exports = openRepo;
