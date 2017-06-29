@@ -29,6 +29,7 @@ Install it globally
 |`getme dt, date [options] [value]`                 | Get x days from now, and the corresponding day of the week                                  |
 |`getme f, forecast [unit]`                         | Get weather forecast of 5 days ahead, default unit is Celsius                               |
 |`getme git`                                        | Get new notifications from GitHub                                                           |
+|`getme repo`                                       | Opens current Github project page in the browser |
 |`getme ip`                                         | Get public and network IP addresses                                                         |
 |`getme q, quote`                                   | Displays an inspirational quote and its author                                              |
 |`getme s, search [query]`                          | Search in Google                                                                            |
@@ -49,6 +50,9 @@ Install it globally
 
 ## GitHub notifications
 `getme git` Option to open selected notification in browser also.
+
+## Github Repository
+`getme repo` Open current Github project repository in the browser
 
 
 

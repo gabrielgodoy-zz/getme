@@ -13,6 +13,7 @@ const optUpload = require('./options/optUpload');
 const optQuote = require('./options/optQuote');
 const optChuckNorris = require('./options/optChuckNorris');
 const optGit = require('./options/optGit');
+const optRepo = require('./options/optRepo');
 const optTwitter = require('./options/optTwitter');
 const optDate = require('./options/optDate');
 
@@ -70,6 +71,11 @@ commander
   .command('git')
   .description('Notifications from GitHub')
   .action(command => optGit(command));
+
+commander
+  .command('repo')
+  .description('Open current Github/Gitlab project page')
+  .action(command => optRepo(command));
 
 commander
   .command('search [query...]')
